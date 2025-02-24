@@ -1,0 +1,23 @@
+{
+  "name": "vitte",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b2black/vitte.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/b2black/vitte/issues"
+  },
+  "homepage": "https://github.com/b2black/vitte#readme",
+  "description": "",
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1"
+  }
+}
