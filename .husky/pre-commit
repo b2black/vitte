@@ -1,2 +1,3 @@
+npx lerna run lint-staged
 npx git-cliff -o CHANGELOG.md
 git add CHANGELOG.md

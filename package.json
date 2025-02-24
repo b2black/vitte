@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/b2black/vitte.git"
   },
+  "workspaces": ["packages/**"],
   "author": "Bogdan Melkov <hellomelkov@gmail.com>",
   "license": "ISC",
   "bugs": {
