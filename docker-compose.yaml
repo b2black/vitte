@@ -1,0 +1,57 @@
+services:
+  backend-dev:
+    container_name: backend_dev_ct
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.dev
+    env_file:
+      - ./packages/backend/.env.development
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./packages/backend:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    profiles:
+      - dev
+
+  backend-prod:
+    container_name: backend_prod_ct
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.prod
+    env_file:
+      - ./packages/backend/.env.production
+    ports:
+      - '8080:3000'
+    depends_on:
+      - db
+    profiles:
+      - prod
+
+  db:
+    image: postgres:17-alpine
+    container_name: db_ct
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_ct
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - '5050:80'
+    depends_on:
+      - db
+
+volumes:
+  db-data:

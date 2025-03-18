@@ -1,5 +1,6 @@
 ## What's Changed
-* feat(System): добавил Nest и git-cliff
+* feat(System): добавил lint-staged by @b2black
+* feat(System): добавил Nest и git-cliff by @b2black
 * feat(System): добавлен husky by @b2black
 * init by @b2black
 
