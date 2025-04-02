@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: postgres-ct
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: vitte
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminer-ct
+    ports:
+      - 8080:8080
+
+volumes:
+  pgdata:
