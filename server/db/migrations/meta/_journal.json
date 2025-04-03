@@ -36,6 +36,34 @@
       "when": 1743616593386,
       "tag": "0004_certain_forgotten_one",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1743679999414,
+      "tag": "0005_exotic_sharon_carter",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1743680060314,
+      "tag": "0006_petite_nightshade",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1743680090400,
+      "tag": "0007_mighty_skreet",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1743683433439,
+      "tag": "0008_mean_puck",
+      "breakpoints": true
     }
   ]
 }
