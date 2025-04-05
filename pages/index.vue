@@ -1,13 +1,11 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <div>
-    Content
-  </div>
+  <UContainer>
+    <RegisterForm />
+    <UsersList />
+  </UContainer>
 </template>
 
-<style scoped>
-
-</style>
+<script setup lang="ts">
+import RegisterForm from "~/components/Forms/RegisterForm.vue";
+import UsersList from "~/components/Users/UsersList.vue";
+</script>

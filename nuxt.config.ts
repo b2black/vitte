@@ -21,14 +21,4 @@ export default defineNuxtConfig({
       tasks: true,
     },
   },
-  eslint: {
-    checker: true,
-    config: {
-      stylistic: {
-        indent: 2,
-        quotes: 'single',
-        semi: true,
-      },
-    },
-  },
 });

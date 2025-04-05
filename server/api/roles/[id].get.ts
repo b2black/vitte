@@ -1,3 +1,5 @@
+import { eq } from 'drizzle-orm';
+
 export default eventHandler(async (event) => {
   const { id } = getRouterParams(event);
 
