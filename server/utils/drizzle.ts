@@ -1,15 +1,13 @@
 import 'dotenv/config';
-import {drizzle} from 'drizzle-orm/node-postgres';
-import {Users} from '~/server/db/schemas/user.schema';
-import {Roles} from '~/server/db/schemas/roles.schema';
-
-export {sql, eq, and, or} from 'drizzle-orm'
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Users } from '~/server/db/schemas/user.schema';
+import { Roles } from '~/server/db/schemas/roles.schema';
 
 export const tables = {
-    Users,
-    Roles,
-}
+  Users,
+  Roles,
+};
 
 export function useDrizzle() {
-    return drizzle(process.env.DATABASE_URL!);
+  return drizzle(process.env.DATABASE_URL!);
 }

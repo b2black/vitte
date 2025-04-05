@@ -26,8 +26,11 @@
     "drizzle-seed": "^0.3.1",
     "eslint": "^9.23.0",
     "nuxt": "^3.16.2",
+    "nuxt-auth-utils": "^0.5.18",
     "pg": "^8.14.1",
     "typescript": "^5.8.2",
+    "valibot": "^1.0.0",
+    "vite-plugin-eslint2": "^5.0.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

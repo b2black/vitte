@@ -1,8 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
-
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
@@ -10,11 +7,28 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/test-utils',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    'nuxt-auth-utils',
   ],
+  devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
+  ui: {
+    colorMode: false,
+  },
+  compatibilityDate: '2024-11-01',
   nitro: {
     experimental: {
-      tasks: true
-    }
-  }
-})
+      tasks: true,
+    },
+  },
+  eslint: {
+    checker: true,
+    config: {
+      stylistic: {
+        indent: 2,
+        quotes: 'single',
+        semi: true,
+      },
+    },
+  },
+});
