@@ -6,7 +6,7 @@ import { hash } from "bcrypt";
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
-    if (!body.email || !body.password || !body.first_name || !body.last_name || !body.role_id) {
+    if (!body.email || !body.password || !body.first_name || !body.last_name) {
         throw createError({ statusCode: 400, message: "Не заполнены обязательные поля" });
     }
 
@@ -21,8 +21,20 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 409, message: "Email уже используется" });
     }
 
+    const defaultRoleQuery = await db
+        .select()
+        .from(tables.Roles)
+        .where(eq(tables.Roles.alias, "student"));
+
+    if (!defaultRoleQuery.length) {
+        throw createError({ statusCode: 404, message: "Стандартная роль не найдена" });
+    }
+
+    body.role_id = defaultRoleQuery[0].id;
+
     const saltRounds = 10;
     body.password = await hash(body.password, saltRounds);
+
 
     const userSchema = createInsertSchema(tables.Users);
     let validatedBody;

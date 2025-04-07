@@ -4,7 +4,7 @@ const { data: users } = await useFetch('/api/users');
 
 <template>
   <div class="users">
-    <UCard v-for="user in users" :key="`user-${user.id}`">
+    <UCard v-for="user in users?.data" :key="`user-${user.id}`">
       <template #header>
         {{ user.first_name }} {{ user.last_name }}
       </template>

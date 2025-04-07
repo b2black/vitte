@@ -19,15 +19,27 @@ const state = reactive({
 });
 
 const toast = useToast();
-
+const loading = ref(false);
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const res = await useFetch('/api/users/', {
+  loading.value = true;
+
+  const result = await useFetch('/api/auth/register', {
     method: 'POST',
     body: event.data,
   });
 
-  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' });
-  console.log(event.data);
+  loading.value = false;
+
+  console.log(result);
+
+  if (result.error.value?.data?.error) {
+    const errorMessage = result.error?.value?.data?.message || 'Произошла неизвестная ошибка';
+    toast.add({title: 'Ошибка', description: errorMessage, color: 'error'});
+
+    return;
+  } else {
+    toast.add({title: 'Успешно', description: '', color: 'success'});
+  }
 }
 </script>
 
@@ -36,24 +48,25 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     :schema="schema"
     :state="state"
     class="space-y-4 w-full"
+    :loading="loading"
     @submit="onSubmit"
   >
     <div class="grid grid-cols-2 gap-4">
       <UFormField label="Имя" name="first_name" required>
-        <UInput v-model="state.first_name" type="text" class="w-full" />
+        <UInput v-model="state.first_name" type="text" :disabled="loading" :loading="loading" class="w-full" />
       </UFormField>
       <UFormField label="Фамилия" name="last_name" required>
-        <UInput v-model="state.last_name" type="text" class="w-full"/>
+        <UInput v-model="state.last_name" type="text" :disabled="loading" :loading="loading" class="w-full"/>
       </UFormField>
       <UFormField label="Email" name="email" required>
-        <UInput v-model="state.email" class="w-full" />
+        <UInput v-model="state.email" class="w-full" :disabled="loading" :loading="loading" />
       </UFormField>
       <UFormField label="Пароль" name="password" required>
-        <UInput v-model="state.password" type="password" class="w-full"/>
+        <UInput v-model="state.password" type="password" class="w-full" :disabled="loading" :loading="loading"/>
       </UFormField>
     </div>
     <div class="flex gap-4">
-      <UButton type="submit">
+      <UButton type="submit" :loading="loading">
         Отправить
       </UButton>
     </div>
