@@ -1,24 +1,25 @@
-import { eq } from 'drizzle-orm';
+import { eq } from "drizzle-orm";
 
-export default eventHandler(async (event) => {
-  const { id } = getRouterParams(event);
+export default defineEventHandler(async (event) => {
+  const roleId = Number(event.context.params?.id);
 
-  if (!/^\d+$/.test(id)) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'ID должен быть номером',
-    });
+  if (!roleId) {
+    throw createError({ statusCode: 400, message: "ID роли обязателен в URL" });
   }
 
-  const parsedId = parseInt(id);
-  const result = await useDrizzle().select().from(tables.Roles).where(eq(tables.Roles.id, parsedId));
+  const role = await useDrizzle()
+      .select({
+        id: tables.Roles.id,
+        name: tables.Roles.name,
+        alias: tables.Roles.alias,
+      })
+      .from(tables.Roles)
+      .where(eq(tables.Roles.id, Number(roleId)))
+      .limit(1);
 
-  if (!result[0]) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Роль Не найдена',
-    });
+  if (role.length === 0) {
+    throw createError({ statusCode: 404, message: "Роль не найдена" });
   }
 
-  return result[0];
+  return role[0];
 });
