@@ -9,9 +9,16 @@ export default defineEventHandler(async (event) => {
 
   const db = useDrizzle()
 
-  const userQuery = await db
-    .select()
+  const userQuery = await db.select({
+    id: tables.Users.id,
+    first_name: tables.Users.first_name,
+    last_name: tables.Users.last_name,
+    password: tables.Users.password,
+    email: tables.Users.email,
+    role: tables.Roles,
+  })
     .from(tables.Users)
+    .leftJoin(tables.Roles, eq(tables.Users.role_id, tables.Roles.id))
     .where(eq(tables.Users.email, body.email.toLowerCase()))
 
   const user = userQuery[0]
@@ -19,26 +26,21 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, message: 'Пользователь не найден' })
   }
 
-  const isPasswordValid = await verifyPassword(body.password, user.password)
+  const isPasswordValid = await verifyPassword(user.password, body.password)
   if (!isPasswordValid) {
     throw createError({ statusCode: 401, message: 'Неверный email или пароль' })
   }
 
-  const token = setUserSession(event, {
-    userId: user.id,
-    role: user.role_id,
+  const { password, ...userWithoutPassword } = user
+
+  const token = await setUserSession(event, {
+    user: userWithoutPassword,
   })
 
   return {
     success: true,
     message: 'Аутентификация выполнена успешно',
+    user: userWithoutPassword,
     token,
-    user: {
-      id: user.id,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      email: user.email,
-      role_id: user.role_id,
-    },
   }
 })

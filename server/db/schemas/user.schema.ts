@@ -1,4 +1,5 @@
 import { pgTable, serial, text, integer, timestamp, uniqueIndex } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
 import { Roles } from './roles.schema'
 import { lower } from './helpers'
 
@@ -18,3 +19,10 @@ export const Users = pgTable(
     uniqueIndex('emailUniqueIndex').on(lower(table.email)),
   ],
 )
+
+export const UsersRelations = relations(Users, ({ one }) => ({
+  role: one(Roles, {
+    fields: [Users.role_id],
+    references: [Roles.id],
+  }),
+}))
