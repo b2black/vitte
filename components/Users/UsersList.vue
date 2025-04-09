@@ -1,10 +1,13 @@
 <script setup lang="ts">
-const { data: users } = await useFetch('/api/users');
+const { data: users } = await useFetch('/api/users')
 </script>
 
 <template>
   <div class="users">
-    <UCard v-for="user in users?.data" :key="`user-${user.id}`">
+    <UCard
+      v-for="user in users?.data"
+      :key="`user-${user.id}`"
+    >
       <template #header>
         {{ user.first_name }} {{ user.last_name }}
       </template>

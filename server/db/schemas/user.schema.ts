@@ -1,6 +1,6 @@
-import { pgTable, serial, text, integer, timestamp, uniqueIndex } from 'drizzle-orm/pg-core';
-import { Roles } from './roles.schema';
-import { lower } from './helpers';
+import { pgTable, serial, text, integer, timestamp, uniqueIndex } from 'drizzle-orm/pg-core'
+import { Roles } from './roles.schema'
+import { lower } from './helpers'
 
 export const Users = pgTable(
   'users',
@@ -17,4 +17,4 @@ export const Users = pgTable(
   table => [
     uniqueIndex('emailUniqueIndex').on(lower(table.email)),
   ],
-);
+)

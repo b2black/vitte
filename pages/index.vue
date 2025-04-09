@@ -6,6 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import RegisterForm from "~/components/Forms/RegisterForm.vue";
-import UsersList from "~/components/Users/UsersList.vue";
+import RegisterForm from '~/components/Forms/RegisterForm.vue'
+import UsersList from '~/components/Users/UsersList.vue'
 </script>

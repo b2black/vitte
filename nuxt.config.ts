@@ -21,4 +21,9 @@ export default defineNuxtConfig({
       tasks: true,
     },
   },
-});
+  eslint: {
+    config: {
+      stylistic: true,
+    },
+  },
+})
