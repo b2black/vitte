@@ -18,6 +18,8 @@ const state = reactive({
 const toast = useToast()
 const loading = ref(false)
 
+const emit = defineEmits(['forgotPassword', 'register'])
+
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true
 
@@ -36,7 +38,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
   toast.add({ title: 'Успешно', description: 'Добро пожаловать!', color: 'success' })
   await refreshSession()
-  await navigateTo('/')
 }
 </script>
 
@@ -76,7 +77,27 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       />
     </UFormField>
 
-    <div class="flex gap-4">
+    <div class="flex justify-between gap-4 mt-8">
+      <div class="flex gap-2">
+        <UButton
+          type="button"
+          color="info"
+          variant="ghost"
+          :loading="loading"
+          @click="emit('forgotPassword')"
+        >
+          Забыли пароль?
+        </UButton>
+        <UButton
+          type="button"
+          color="info"
+          variant="ghost"
+          :loading="loading"
+          @click="emit('register')"
+        >
+          Регистрация
+        </UButton>
+      </div>
       <UButton
         type="submit"
         :loading="loading"

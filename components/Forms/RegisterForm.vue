@@ -20,6 +20,8 @@ const state = reactive({
 
 const toast = useToast()
 const loading = ref(false)
+
+const emit = defineEmits(['login'])
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true
 
@@ -101,12 +103,24 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         />
       </UFormField>
     </div>
-    <div class="flex gap-4">
+    <div class="flex justify-between gap-4 mt-8">
+      <div class="flex gap-2">
+        <UButton
+          type="button"
+          color="info"
+          variant="ghost"
+          :loading="loading"
+          @click="emit('login')"
+        >
+          Авторизоваться
+        </UButton>
+      </div>
       <UButton
         type="submit"
         :loading="loading"
+        color="primary"
       >
-        Отправить
+        Зарегистрироваться
       </UButton>
     </div>
   </UForm>
