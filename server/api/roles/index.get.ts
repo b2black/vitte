@@ -7,7 +7,7 @@ export default eventHandler(async (event) => {
 
   const data = await useDrizzle()
     .select()
-    .from(tables.Roles)
+    .from(tables.roles)
     .limit(limit)
     .offset(offset)
 

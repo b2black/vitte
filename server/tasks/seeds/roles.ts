@@ -2,12 +2,12 @@ import { tables } from '~/server/utils/drizzle'
 
 export default defineTask({
   meta: {
-    name: 'db:seed',
-    description: 'Посев',
+    name: 'seed:roles',
+    description: 'Посев ролей',
   },
   async run() {
     console.log('Начался посев...')
-    const roles: (typeof tables.Roles.$inferInsert)[] = [
+    const roles: (typeof tables.roles.$inferInsert)[] = [
       {
         name: 'Администратор',
         alias: 'admin',
@@ -22,7 +22,7 @@ export default defineTask({
       },
     ]
 
-    await useDrizzle().insert(tables.Roles).values(roles)
+    await useDrizzle().insert(tables.roles).values(roles)
     return { result: 'Успешно' }
   },
 })

@@ -9,17 +9,17 @@ export default defineEventHandler(async (event) => {
 
   const user = await useDrizzle()
     .select({
-      id: tables.Users.id,
-      first_name: tables.Users.first_name,
-      last_name: tables.Users.last_name,
-      email: tables.Users.email,
-      role_id: tables.Users.role_id,
-      role_alias: tables.Roles.alias,
-      role_name: tables.Roles.name,
+      id: tables.users.id,
+      first_name: tables.users.first_name,
+      last_name: tables.users.last_name,
+      email: tables.users.email,
+      role_id: tables.users.role_id,
+      role_alias: tables.roles.alias,
+      role_name: tables.roles.name,
     })
-    .from(tables.Users)
-    .leftJoin(tables.Roles, eq(tables.Users.role_id, tables.Roles.id))
-    .where(eq(tables.Users.id, Number(userId)))
+    .from(tables.users)
+    .leftJoin(tables.roles, eq(tables.users.role_id, tables.roles.id))
+    .where(eq(tables.users.id, Number(userId)))
     .limit(1)
 
   if (user.length === 0) {

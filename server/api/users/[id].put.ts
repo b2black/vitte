@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Не указаны поля для обновления' })
   }
 
-  const userUpdateSchema = partial(createUpdateSchema(tables.Users))
+  const userUpdateSchema = partial(createUpdateSchema(tables.users))
 
   let parsed
   try {
@@ -25,9 +25,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const result = await useDrizzle()
-    .update(tables.Users)
+    .update(tables.users)
     .set(parsed)
-    .where(eq(tables.Users.id, userId))
+    .where(eq(tables.users.id, userId))
 
   if (result.rowCount === 0) {
     throw createError({ statusCode: 404, message: 'Пользователь не найден или изменения не были внесены' })

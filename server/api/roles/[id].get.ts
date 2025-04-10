@@ -9,12 +9,12 @@ export default defineEventHandler(async (event) => {
 
   const role = await useDrizzle()
     .select({
-      id: tables.Roles.id,
-      name: tables.Roles.name,
-      alias: tables.Roles.alias,
+      id: tables.roles.id,
+      name: tables.roles.name,
+      alias: tables.roles.alias,
     })
-    .from(tables.Roles)
-    .where(eq(tables.Roles.id, Number(roleId)))
+    .from(tables.roles)
+    .where(eq(tables.roles.id, Number(roleId)))
     .limit(1)
 
   if (role.length === 0) {

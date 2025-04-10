@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Не указаны данные для создания роли' })
   }
 
-  const roleInsertSchema = createInsertSchema(tables.Roles)
+  const roleInsertSchema = createInsertSchema(tables.roles)
 
   let parsed
   try {
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Ошибка валидации данных', data: error })
   }
 
-  const result = await useDrizzle().insert(tables.Roles).values(parsed)
+  const result = await useDrizzle().insert(tables.roles).values(parsed)
 
   return {
     message: 'Роль успешно создана',

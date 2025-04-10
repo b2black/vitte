@@ -13,8 +13,8 @@ export default defineEventHandler(async (event) => {
 
   const existingUser = await db
     .select()
-    .from(tables.Users)
-    .where(eq(tables.Users.email, body.email.toLowerCase()))
+    .from(tables.users)
+    .where(eq(tables.users.email, body.email.toLowerCase()))
 
   if (existingUser.length) {
     throw createError({ statusCode: 409, message: 'Email уже используется' })
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
 
   body.password = await hashPassword(body.password)
 
-  const userSchema = createInsertSchema(tables.Users)
+  const userSchema = createInsertSchema(tables.users)
   let validatedBody
   try {
     validatedBody = parse(userSchema, body)
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const result = await db.insert(tables.Users).values(validatedBody).returning()
+    const result = await db.insert(tables.users).values(validatedBody).returning()
     return {
       success: true,
       message: 'Пользователь успешно зарегистрирован',

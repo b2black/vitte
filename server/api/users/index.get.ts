@@ -9,18 +9,18 @@ export default eventHandler(async (event) => {
 
   const data = await useDrizzle()
     .select({
-      id: tables.Users.id,
-      first_name: tables.Users.first_name,
-      last_name: tables.Users.last_name,
-      email: tables.Users.email,
-      role_id: tables.Users.role_id,
-      role_alias: tables.Roles.alias,
-      role_name: tables.Roles.name,
+      id: tables.users.id,
+      first_name: tables.users.first_name,
+      last_name: tables.users.last_name,
+      email: tables.users.email,
+      role_id: tables.users.role_id,
+      role_alias: tables.roles.alias,
+      role_name: tables.roles.name,
     })
-    .from(tables.Users)
+    .from(tables.users)
     .limit(limit)
     .offset(offset)
-    .leftJoin(tables.Roles, eq(tables.Users.role_id, tables.Roles.id))
+    .leftJoin(tables.roles, eq(tables.users.role_id, tables.roles.id))
 
   return {
     data,

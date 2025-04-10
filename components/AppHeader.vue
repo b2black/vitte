@@ -26,6 +26,8 @@ const profileItems: DropdownMenuItem[] = [
   ],
 ]
 
+const { menuItems } = await useMenu()
+
 const openRegisterForm = () => {
   isRegisterFormOpen.value = true
   isLoginFormOpen.value = false
@@ -46,21 +48,18 @@ watch(loggedIn, (value) => {
 
 <template>
   <header class="border-b border-gray-200 bg-white">
-    <UContainer class="mx-auto px-4 py-3 flex items-center justify-between">
+    <UContainer class="mx-auto px-4 py-3 flex items-center justify-between gap-8">
       <NuxtLink
         to="/"
         class="flex items-center gap-2"
       >
-        <UIcon
-          name="i-heroicons-academic-cap"
-          class="w-6 h-6 text-primary"
-        />
         <span class="font-bold text-lg">МУИВ</span>
       </NuxtLink>
 
-      <nav class="hidden md:flex items-center gap-6">
-        <!-- Add navigation links here -->
-      </nav>
+      <UNavigationMenu
+        :items="menuItems"
+        class="w-full"
+      />
 
       <div class="flex items-center gap-3">
         <UModal

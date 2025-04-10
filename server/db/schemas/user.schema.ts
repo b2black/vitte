@@ -1,9 +1,9 @@
 import { pgTable, serial, text, integer, timestamp, uniqueIndex } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
-import { Roles } from './roles.schema'
+import { roles } from './roles.schema'
 import { lower } from './helpers'
 
-export const Users = pgTable(
+export const users = pgTable(
   'users',
   {
     id: serial('id').primaryKey(),
@@ -11,7 +11,7 @@ export const Users = pgTable(
     last_name: text('last_name').notNull(),
     email: text('email').notNull(),
     password: text('password').notNull(),
-    role_id: integer('role_id').notNull().references(() => Roles.id),
+    role_id: integer('role_id').notNull().references(() => roles.id),
     created_at: timestamp('created_at').defaultNow().notNull(),
     updated_at: timestamp('updated_at').defaultNow().$onUpdateFn(() => new Date()).notNull(),
   },
@@ -20,9 +20,9 @@ export const Users = pgTable(
   ],
 )
 
-export const UsersRelations = relations(Users, ({ one }) => ({
-  role: one(Roles, {
-    fields: [Users.role_id],
-    references: [Roles.id],
+export const usersRelations = relations(users, ({ one }) => ({
+  role: one(roles, {
+    fields: [users.role_id],
+    references: [roles.id],
   }),
 }))

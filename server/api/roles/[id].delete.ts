@@ -8,8 +8,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const result = await useDrizzle()
-    .delete(tables.Roles)
-    .where(eq(tables.Roles.id, roleId))
+    .delete(tables.roles)
+    .where(eq(tables.roles.id, roleId))
 
   if (result.rowCount === 0) {
     throw createError({ statusCode: 404, message: 'Роль не найдена' })

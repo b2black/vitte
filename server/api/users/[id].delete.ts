@@ -8,8 +8,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const result = await useDrizzle()
-    .delete(tables.Users)
-    .where(eq(tables.Users.id, Number(userId)))
+    .delete(tables.users)
+    .where(eq(tables.users.id, Number(userId)))
 
   if (result.rowCount === 0) {
     throw createError({ statusCode: 404, message: 'Пользователь не найден' })

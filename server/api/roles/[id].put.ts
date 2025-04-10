@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Не указаны поля для обновления' })
   }
 
-  const roleUpdateSchema = partial(createUpdateSchema(tables.Roles))
+  const roleUpdateSchema = partial(createUpdateSchema(tables.roles))
 
   let parsed
   try {
@@ -25,9 +25,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const result = await useDrizzle()
-    .update(tables.Roles)
+    .update(tables.roles)
     .set(parsed)
-    .where(eq(tables.Roles.id, roleId))
+    .where(eq(tables.roles.id, roleId))
 
   if (result.rowCount === 0) {
     throw createError({ statusCode: 404, message: 'Роль не найдена или изменения не были внесены' })

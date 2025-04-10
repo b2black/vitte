@@ -10,16 +10,16 @@ export default defineEventHandler(async (event) => {
   const db = useDrizzle()
 
   const userQuery = await db.select({
-    id: tables.Users.id,
-    first_name: tables.Users.first_name,
-    last_name: tables.Users.last_name,
-    password: tables.Users.password,
-    email: tables.Users.email,
-    role: tables.Roles,
+    id: tables.users.id,
+    first_name: tables.users.first_name,
+    last_name: tables.users.last_name,
+    password: tables.users.password,
+    email: tables.users.email,
+    role: tables.roles,
   })
-    .from(tables.Users)
-    .leftJoin(tables.Roles, eq(tables.Users.role_id, tables.Roles.id))
-    .where(eq(tables.Users.email, body.email.toLowerCase()))
+    .from(tables.users)
+    .leftJoin(tables.roles, eq(tables.users.role_id, tables.roles.id))
+    .where(eq(tables.users.email, body.email.toLowerCase()))
 
   const user = userQuery[0]
   if (!user) {
