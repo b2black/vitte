@@ -3,7 +3,7 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 export async function useMenu() {
   const { data: apiMenuItems, error } = await useFetch<NavigationMenuItem[]>('/api/menu')
 
-  const menuItems = ref<NavigationMenuItem[] | null>([])
+  const menuItems = ref<NavigationMenuItem[]>([])
 
   if (error.value) {
     useToast().add({
@@ -13,7 +13,7 @@ export async function useMenu() {
     })
   }
   else {
-    menuItems.value = apiMenuItems.value
+    menuItems.value = apiMenuItems.value ?? []
   }
 
   return {
