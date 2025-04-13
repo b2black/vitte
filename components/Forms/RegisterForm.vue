@@ -105,15 +105,11 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </div>
     <div class="flex justify-between gap-4 mt-8">
       <div class="flex gap-2">
-        <UButton
-          type="button"
-          color="info"
-          variant="ghost"
-          :loading="loading"
-          @click="emit('login')"
+        <ULink
+          @click.prevent="emit('login')"
         >
-          Авторизоваться
-        </UButton>
+          Есть аккаунт?
+        </ULink>
       </div>
       <UButton
         type="submit"

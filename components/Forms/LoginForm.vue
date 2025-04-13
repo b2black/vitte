@@ -78,25 +78,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </UFormField>
 
     <div class="flex justify-between gap-4 mt-8">
-      <div class="flex gap-2">
-        <UButton
-          type="button"
-          color="info"
-          variant="ghost"
-          :loading="loading"
-          @click="emit('forgotPassword')"
-        >
+      <div class="flex gap-8">
+        <ULink @click.prevent="emit('forgotPassword')">
           Забыли пароль?
-        </UButton>
-        <UButton
-          type="button"
-          color="info"
-          variant="ghost"
-          :loading="loading"
-          @click="emit('register')"
-        >
+        </ULink>
+        <ULink @click.prevent="emit('register')">
           Регистрация
-        </UButton>
+        </ULink>
       </div>
       <UButton
         type="submit"

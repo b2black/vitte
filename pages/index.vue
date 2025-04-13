@@ -3,7 +3,10 @@ const { user } = useUserSession()
 </script>
 
 <template>
-  <UContainer class="min-h-screen py-16">
-    {{ user }}
-  </UContainer>
+  <main>
+    <h1>Главная</h1>
+    <div>
+      {{ user }}
+    </div>
+  </main>
 </template>

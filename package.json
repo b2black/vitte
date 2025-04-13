@@ -30,6 +30,7 @@
     "drizzle-seed": "^0.3.1",
     "drizzle-valibot": "^0.4.1",
     "eslint": "^9.23.0",
+    "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.16.2",
     "nuxt-auth-utils": "^0.5.18",
     "pg": "^8.14.1",
@@ -42,6 +43,7 @@
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.35",
     "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/pg": "^8.11.11",
     "drizzle-kit": "^0.30.6",
     "tsx": "^4.19.3"

@@ -1,6 +1,7 @@
 import { eq } from 'drizzle-orm'
 import { createInsertSchema } from 'drizzle-valibot'
 import { parse } from 'valibot'
+import { tokenGenerator } from '~/server/providers/TokenGenerator'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -23,7 +24,7 @@ export default defineEventHandler(async (event) => {
   const defaultRoleQuery = await db
     .select()
     .from(tables.roles)
-    .where(eq(tables.roles.alias, 'student'))
+    .where(eq(tables.roles.alias, 'default'))
 
   if (!defaultRoleQuery.length) {
     throw createError({ statusCode: 404, message: 'Стандартная роль не найдена' })
@@ -44,6 +45,14 @@ export default defineEventHandler(async (event) => {
 
   try {
     const result = await db.insert(tables.users).values(validatedBody).returning()
+
+    const req = event.node.req
+    const protocol = req.headers['x-forwarded-proto'] || 'http'
+    const host = req.headers.host
+    const url = `${protocol}://${host}/auth/confirm`
+    const token = await tokenGenerator.generate(result[0],
+      process.env.JWT_SECRET as string, { expiresIn: '1d' })
+
     return {
       success: true,
       message: 'Пользователь успешно зарегистрирован',

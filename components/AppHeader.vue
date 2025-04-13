@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 import LoginForm from '~/components/Forms/LoginForm.vue'
-import RegisterForm from '~/components/Forms/RegisterForm.vue'
 
 const { loggedIn, clear, user } = useUserSession()
-const isRegisterFormOpen = ref(false)
 const isLoginFormOpen = ref(false)
 
 const profileItems: DropdownMenuItem[] = [
@@ -28,19 +26,8 @@ const profileItems: DropdownMenuItem[] = [
 
 const { menuItems } = await useMenu()
 
-const openRegisterForm = () => {
-  isRegisterFormOpen.value = true
-  isLoginFormOpen.value = false
-}
-
-const openLoginForm = () => {
-  isRegisterFormOpen.value = false
-  isLoginFormOpen.value = true
-}
-
 watch(loggedIn, (value) => {
   if (value) {
-    isRegisterFormOpen.value = false
     isLoginFormOpen.value = false
   }
 })
@@ -73,7 +60,10 @@ watch(loggedIn, (value) => {
             color="primary"
           />
           <template #body>
-            <LoginForm @register="openRegisterForm" />
+            <LoginForm
+              @forgot-password="navigateTo('/auth/reset_password'); isLoginFormOpen = false"
+              @register="navigateTo('/auth/register'); isLoginFormOpen = false"
+            />
           </template>
         </UModal>
 
@@ -92,14 +82,5 @@ watch(loggedIn, (value) => {
         </UDropdownMenu>
       </div>
     </UContainer>
-
-    <UModal
-      v-model:open="isRegisterFormOpen"
-      title="Зарегистрироваться"
-    >
-      <template #body>
-        <RegisterForm @login="openLoginForm" />
-      </template>
-    </UModal>
   </header>
 </template>

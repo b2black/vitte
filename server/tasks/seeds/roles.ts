@@ -9,6 +9,10 @@ export default defineTask({
     console.log('Начался посев...')
     const roles: (typeof tables.roles.$inferInsert)[] = [
       {
+        name: 'Стандартный',
+        alias: 'default',
+      },
+      {
         name: 'Администратор',
         alias: 'admin',
       },

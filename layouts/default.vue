@@ -6,7 +6,9 @@ import AppFooter from '~/components/AppFooter.vue'
 <template>
   <div class="main-layout">
     <AppHeader />
-    <slot />
+    <UContainer class="min-h-screen py-8">
+      <slot />
+    </UContainer>
     <AppFooter />
   </div>
 </template>
