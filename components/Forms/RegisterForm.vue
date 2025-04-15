@@ -20,10 +20,14 @@ const state = reactive({
 
 const toast = useToast()
 const loading = ref(false)
+const status = ref('')
+const message = ref('')
 
 const emit = defineEmits(['login'])
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true
+  status.value = 'loading'
+  message.value = 'Загрузка'
 
   const result = await useFetch('/api/auth/register', {
     method: 'POST',
@@ -32,18 +36,24 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
   loading.value = false
 
-  console.log(result)
-
   if (result.error.value?.data?.error) {
     const errorMessage = result.error?.value?.data?.message || 'Произошла неизвестная ошибка'
-    toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
-
+    toast.add({ title: 'Произошла ошибка', description: errorMessage, color: 'error' })
+    status.value = 'error'
+    message.value = errorMessage
     return
   }
   else {
-    toast.add({ title: 'Успешно', description: '', color: 'success' })
+    status.value = 'success'
+    message.value = result.data?.value?.message ?? 'Пользователь успешно зарегистрирован'
+    toast.add({ title: 'Успешно', description: result.data?.value?.message || 'Пользователь успешно зарегистрирован', color: 'success' })
   }
 }
+
+defineExpose({
+  status,
+  message,
+})
 </script>
 
 <template>

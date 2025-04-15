@@ -4,7 +4,7 @@ const { user } = useUserSession()
 
 <template>
   <main>
-    <h1>Главная</h1>
+    <h1>МУИВ</h1>
     <div>
       {{ user }}
     </div>

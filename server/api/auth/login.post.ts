@@ -38,7 +38,6 @@ export default defineEventHandler(async (event) => {
   })
 
   return {
-    success: true,
     message: 'Аутентификация выполнена успешно',
     user: userWithoutPassword,
     token,

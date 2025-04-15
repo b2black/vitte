@@ -50,18 +50,30 @@ export default defineEventHandler(async (event) => {
     const protocol = req.headers['x-forwarded-proto'] || 'http'
     const host = req.headers.host
     const url = `${protocol}://${host}/auth/confirm`
-    const token = await tokenGenerator.generate(result[0],
+    const token = await tokenGenerator.generate({ email: result[0].email },
       process.env.JWT_SECRET as string, { expiresIn: '1d' })
 
+    const mail = useMail()
+
+    await mail.sendMail(
+      {
+        protocol: protocol,
+        to: body.email,
+        subject: 'Подтверждение регистрации',
+        text: `Подтвердите регистрацию, перейдя по ссылке: ${url}?token=${token}`,
+        html: `<p>Подтвердите регистрацию, перейдя по ссылке: <a href="${url}?token=${token}">${url}?token=${token}</a></p>`,
+      },
+    )
+
     return {
-      success: true,
-      message: 'Пользователь успешно зарегистрирован',
+      message: `Спасибо за регистрацию на нашем сайте! \
+          Пожалуйста, подтвердите ваш email, ссылка отправлена вам на электронную почту`,
       user: {
         id: result[0].id,
-        first_name: body.first_name,
-        last_name: body.last_name,
-        email: body.email,
-        role_id: body.role_id,
+        first_name: result[0].first_name,
+        last_name: result[0].last_name,
+        email: result[0].email,
+        role_id: result[0].role_id,
       },
     }
   }

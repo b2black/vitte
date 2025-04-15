@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer'
 import 'dotenv/config'
-import type SMTPPool from 'nodemailer/lib/smtp-pool'
 
 export function useMail() {
   const config = {
@@ -13,5 +12,6 @@ export function useMail() {
     },
   }
 
-  return nodemailer.createTransport(config as SMTPPool.Options)
+  // @ts-expect-error transport config
+  return nodemailer.createTransport(config)
 }
