@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
     await db.update(tables.users).set({ confirmed: true }).where(eq(tables.users.email, result.email))
 
     return {
+      success: true,
       message: `Пользователь ${user.first_name} ${user.last_name} успешно подтвержден. Пожалуйста авторизуйтесь`,
     }
   }

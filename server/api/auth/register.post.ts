@@ -55,9 +55,8 @@ export default defineEventHandler(async (event) => {
 
     const mail = useMail()
 
-    await mail.sendMail(
+    mail.sendMail(
       {
-        protocol: protocol,
         to: body.email,
         subject: 'Подтверждение регистрации',
         text: `Подтвердите регистрацию, перейдя по ссылке: ${url}?token=${token}`,
@@ -66,6 +65,7 @@ export default defineEventHandler(async (event) => {
     )
 
     return {
+      success: true,
       message: `Спасибо за регистрацию на нашем сайте! \
           Пожалуйста, подтвердите ваш email, ссылка отправлена вам на электронную почту`,
       user: {

@@ -15,6 +15,8 @@ export default defineEventHandler(async (event) => {
     last_name: tables.users.last_name,
     password: tables.users.password,
     email: tables.users.email,
+    confirmed: tables.users.confirmed,
+    created_at: tables.users.created_at,
     role: tables.roles,
   })
     .from(tables.users)
@@ -38,6 +40,7 @@ export default defineEventHandler(async (event) => {
   })
 
   return {
+    success: true,
     message: 'Аутентификация выполнена успешно',
     user: userWithoutPassword,
     token,

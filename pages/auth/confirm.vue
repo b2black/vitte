@@ -3,8 +3,10 @@ useHead({
   title: 'Подтверждение email',
 })
 const { confirmEmail, status, message } = useConfirmEmail()
+const { clear } = useUserSession()
 
 onMounted(async () => {
+  await clear()
   await confirmEmail()
 })
 

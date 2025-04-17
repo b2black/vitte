@@ -12,7 +12,7 @@ useHead({
       Авторизация
     </h1>
     <LoginForm
-      @forgot-password="navigateTo('/auth/reset_password')"
+      @forgot-password="navigateTo('/auth/forgot_password')"
       @register="navigateTo('/auth/register')"
     />
   </main>

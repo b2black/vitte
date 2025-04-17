@@ -2,28 +2,25 @@
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
-const { fetch: refreshSession } = useUserSession()
 const schema = v.object({
   email: v.pipe(v.string(), v.nonEmpty(), v.email()),
-  password: v.pipe(v.string(), v.nonEmpty(), v.minLength(6)),
 })
 
 type Schema = v.InferOutput<typeof schema>
 
 const state = reactive({
   email: '',
-  password: '',
 })
 
 const toast = useToast()
 const loading = ref(false)
 
-const emit = defineEmits(['forgotPassword', 'register', 'success'])
+const emit = defineEmits(['back', 'success'])
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true
 
-  const result = await useFetch('/api/auth/login', {
+  const result = await useFetch('/api/auth/forgot-password', {
     method: 'POST',
     body: event.data,
   })
@@ -35,10 +32,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
     return
   }
-
-  toast.add({ title: 'Успешно', description: 'Добро пожаловать!', color: 'success' })
   emit('success')
-  await refreshSession()
+  toast.add({ title: 'Успешно', description: result.data.value?.message, color: 'success' })
+  state.email = ''
 }
 </script>
 
@@ -64,39 +60,17 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       />
     </UFormField>
 
-    <UFormField
-      label="Пароль"
-      name="password"
-      required
-    >
-      <UInput
-        v-model="state.password"
-        type="password"
-        :disabled="loading"
-        placeholder="Введите ваш пароль"
-        class="w-full"
-      />
-    </UFormField>
-
     <div class="flex justify-between gap-4 mt-8">
-      <div class="flex gap-8">
-        <ULink @click.prevent="emit('forgotPassword')">
-          Забыли пароль?
-        </ULink>
-        <ULink @click.prevent="emit('register')">
-          Регистрация
-        </ULink>
-      </div>
+      <ULink @click.prevent="emit('back')">
+        Вернуться к входу
+      </ULink>
       <UButton
         type="submit"
         :loading="loading"
         color="primary"
       >
-        Войти
+        Отправить
       </UButton>
     </div>
   </UForm>
 </template>
-
-<style scoped>
-</style>

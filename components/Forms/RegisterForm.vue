@@ -23,7 +23,7 @@ const loading = ref(false)
 const status = ref('')
 const message = ref('')
 
-const emit = defineEmits(['login'])
+const emit = defineEmits(['login', 'success'])
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true
   status.value = 'loading'
@@ -47,6 +47,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     status.value = 'success'
     message.value = result.data?.value?.message ?? 'Пользователь успешно зарегистрирован'
     toast.add({ title: 'Успешно', description: result.data?.value?.message || 'Пользователь успешно зарегистрирован', color: 'success' })
+    emit('success')
   }
 }
 

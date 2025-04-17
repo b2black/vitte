@@ -2,30 +2,45 @@
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
-const { fetch: refreshSession } = useUserSession()
 const schema = v.object({
-  email: v.pipe(v.string(), v.nonEmpty(), v.email()),
-  password: v.pipe(v.string(), v.nonEmpty(), v.minLength(6)),
+  password: v.pipe(
+    v.string(),
+    v.nonEmpty(),
+    v.minLength(6),
+  ),
+  confirmPassword: v.pipe(
+    v.string(),
+    v.nonEmpty(),
+  ),
 })
 
 type Schema = v.InferOutput<typeof schema>
 
+const route = useRoute()
 const state = reactive({
-  email: '',
   password: '',
+  confirmPassword: '',
 })
 
 const toast = useToast()
 const loading = ref(false)
 
-const emit = defineEmits(['forgotPassword', 'register', 'success'])
+const emit = defineEmits(['success'])
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  if (state.password !== state.confirmPassword) {
+    toast.add({ title: 'Ошибка', description: 'Пароли не совпадают', color: 'error' })
+    return
+  }
+
   loading.value = true
 
-  const result = await useFetch('/api/auth/login', {
+  const result = await useFetch('/api/auth/reset-password', {
     method: 'POST',
-    body: event.data,
+    body: {
+      token: route.query.token,
+      password: event.data.password,
+    },
   })
 
   loading.value = false
@@ -36,9 +51,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     return
   }
 
-  toast.add({ title: 'Успешно', description: 'Добро пожаловать!', color: 'success' })
+  toast.add({ title: 'Успешно', description: result.data.value?.message, color: 'success' })
+  state.password = ''
+  state.confirmPassword = ''
   emit('success')
-  await refreshSession()
 }
 </script>
 
@@ -51,21 +67,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     @submit="onSubmit"
   >
     <UFormField
-      label="Email"
-      name="email"
-      required
-    >
-      <UInput
-        v-model="state.email"
-        type="email"
-        :disabled="loading"
-        placeholder="Введите ваш email"
-        class="w-full"
-      />
-    </UFormField>
-
-    <UFormField
-      label="Пароль"
+      label="Новый пароль"
       name="password"
       required
     >
@@ -73,30 +75,33 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         v-model="state.password"
         type="password"
         :disabled="loading"
-        placeholder="Введите ваш пароль"
+        placeholder="Введите новый пароль"
         class="w-full"
       />
     </UFormField>
 
-    <div class="flex justify-between gap-4 mt-8">
-      <div class="flex gap-8">
-        <ULink @click.prevent="emit('forgotPassword')">
-          Забыли пароль?
-        </ULink>
-        <ULink @click.prevent="emit('register')">
-          Регистрация
-        </ULink>
-      </div>
+    <UFormField
+      label="Подтверждение пароля"
+      name="confirmPassword"
+      required
+    >
+      <UInput
+        v-model="state.confirmPassword"
+        type="password"
+        :disabled="loading"
+        placeholder="Подтвердите новый пароль"
+        class="w-full"
+      />
+    </UFormField>
+
+    <div class="flex justify-end gap-4 mt-8">
       <UButton
         type="submit"
         :loading="loading"
         color="primary"
       >
-        Войти
+        Сохранить новый пароль
       </UButton>
     </div>
   </UForm>
 </template>
-
-<style scoped>
-</style>
