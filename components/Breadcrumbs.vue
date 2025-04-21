@@ -1,50 +1,45 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '@nuxt/ui'
 
-const items = [
-  {
-    label: 'Home',
+const route = useRoute()
+
+const crumbs = computed(() => {
+  const pathArray = route.path.split('/').filter(i => i)
+  const breadcrumbs = []
+  let path = ''
+
+  breadcrumbs.push({
+    label: 'Главная',
     to: '/',
-  },
-  {
-    slot: 'dropdown' as const,
-    icon: 'i-lucide-ellipsis',
-    children: [
-      {
-        label: 'Documentation',
-      },
-      {
-        label: 'Themes',
-      },
-      {
-        label: 'GitHub',
-      },
-    ],
-  },
-  {
-    label: 'Components',
-    to: '/components',
-  },
-  {
-    label: 'Breadcrumb',
-    to: '/components/breadcrumb',
-  },
-] satisfies BreadcrumbItem[]
+  })
+
+  pathArray.forEach((item) => {
+    path = `${path}/${item}`
+
+    const matchedRoute = route.matched.find((r) => {
+      const routePath = r.path.replace(/\/:.*?(?=\/|$)/g, '/[^/]+')
+      return new RegExp(`^${routePath}$`).test(path)
+    })
+
+    const title = matchedRoute?.meta?.title
+
+    if (title) {
+      breadcrumbs.push({
+        label: title,
+        to: path,
+      })
+    }
+  })
+
+  return breadcrumbs
+}) satisfies ComputedRef<BreadcrumbItem[]>
 </script>
 
 <template>
-  <UContainer class="py-8">
-    <UBreadcrumb :items="items">
-      <template #dropdown="{ item }">
-        <UDropdownMenu :items="item.children">
-          <UButton
-            :icon="item.icon"
-            color="neutral"
-            variant="link"
-            class="p-0.5"
-          />
-        </UDropdownMenu>
-      </template>
-    </UBreadcrumb>
+  <UContainer
+    v-if="route?.matched[0]?.name !== 'index'"
+    class="pt-8 pb-4"
+  >
+    <UBreadcrumb :items="crumbs" />
   </UContainer>
 </template>

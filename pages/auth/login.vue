@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import LoginForm from '~/components/Forms/LoginForm.vue'
+import { definePageMeta } from '#imports'
+
+const title = 'Авторизация'
 
 useHead({
-  title: 'Авторизация',
+  title,
+})
+
+definePageMeta({
+  title,
 })
 </script>
 
 <template>
   <main>
-    <h1 class="text-2xl font-bold mb-8">
-      Авторизация
-    </h1>
     <LoginForm
       @forgot-password="navigateTo('/auth/forgot_password')"
       @register="navigateTo('/auth/register')"

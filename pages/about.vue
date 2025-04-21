@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const title = 'МУИВ | Главная'
-definePageMeta({
-  title,
-})
+const title = 'Об университете'
 
 useHead({
+  title,
+})
+definePageMeta({
   title,
 })
 </script>

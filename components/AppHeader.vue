@@ -18,7 +18,10 @@ const profileItems: DropdownMenuItem[] = [
     {
       label: 'Выйти',
       icon: 'i-lucide-log-out',
-      onSelect: clear,
+      onSelect: async () => {
+        await clear()
+        window.location.reload()
+      },
       type: 'link',
     },
   ],

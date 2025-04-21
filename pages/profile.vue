@@ -1,6 +1,12 @@
 <script setup lang="ts">
+const title = 'Личный кабинет'
+
+useHead({
+  title,
+})
 definePageMeta({
   middleware: 'authenticated',
+  title,
 })
 
 const { user } = useUserSession()
@@ -40,18 +46,10 @@ async function sendConfirmationEmail() {
     loading.value = false
   }
 }
-
-useHead({
-  title: 'Профиль',
-})
 </script>
 
 <template>
   <main>
-    <h1 class="text-2xl font-bold mb-8">
-      Профиль
-    </h1>
-
     <UCard class="max-w-2xl">
       <template #header>
         <div class="flex items-center justify-between">

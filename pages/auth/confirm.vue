@@ -1,6 +1,12 @@
 <script setup lang="ts">
+const title = 'Подтверждение email'
+
 useHead({
-  title: 'Подтверждение email',
+  title,
+})
+
+definePageMeta({
+  title,
 })
 const { confirmEmail, status, message } = useConfirmEmail()
 const { clear } = useUserSession()
@@ -26,9 +32,6 @@ const alertColor = computed(() => {
 
 <template>
   <main>
-    <h1 class="text-2xl font-bold mb-8">
-      Подтверждение email
-    </h1>
     <UAlert
       :color="alertColor"
       variant="subtle"

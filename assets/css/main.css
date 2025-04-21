@@ -4,3 +4,7 @@
 button, link {
     cursor: pointer;
 }
+
+:root {
+    --ui-primary: red;
+}

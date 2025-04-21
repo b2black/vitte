@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import RegisterForm from '~/components/Forms/RegisterForm.vue'
 
+const title = 'Регистрация'
 useHead({
-  title: 'Регистрация',
+  title,
+})
+
+definePageMeta({
+  title,
 })
 
 const registerFormRef = ref<typeof RegisterForm>()
@@ -10,9 +15,6 @@ const registerFormRef = ref<typeof RegisterForm>()
 
 <template>
   <main>
-    <h1 class="text-2xl font-bold mb-8">
-      Регистрация
-    </h1>
     <RegisterForm
       ref="registerFormRef"
       @login="navigateTo('/auth/login')"

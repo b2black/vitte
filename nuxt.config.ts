@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/test-utils',
     '@nuxt/ui',
     'nuxt-auth-utils',
+    '@nuxtjs/i18n',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
@@ -25,5 +26,8 @@ export default defineNuxtConfig({
     config: {
       stylistic: true,
     },
+  },
+  i18n: {
+    defaultLocale: 'ru',
   },
 })
