@@ -2,36 +2,38 @@
 import type { BreadcrumbItem } from '@nuxt/ui'
 
 const route = useRoute()
+const router = useRouter()
 
-const crumbs = computed(() => {
-  const pathArray = route.path.split('/').filter(i => i)
-  const breadcrumbs = []
-  let path = ''
+const items = computed(() => {
+  const fullPath = route.path
+  const requestPath = fullPath.startsWith('/')
+    ? fullPath.substring(1)
+    : fullPath
+  const crumbs = requestPath.split('/')
+  const parts = []
 
-  breadcrumbs.push({
+  parts.push({
     label: 'Главная',
     to: '/',
   })
 
-  pathArray.forEach((item) => {
-    path = `${path}/${item}`
-
-    const matchedRoute = route.matched.find((r) => {
-      const routePath = r.path.replace(/\/:.*?(?=\/|$)/g, '/[^/]+')
-      return new RegExp(`^${routePath}$`).test(path)
-    })
-
-    const title = matchedRoute?.meta?.title
-
-    if (title) {
-      breadcrumbs.push({
-        label: title,
-        to: path,
-      })
+  let path = ''
+  crumbs.forEach((crumb) => {
+    if (crumb) {
+      path = `${path}/${crumb}`
+      const part = router.getRoutes().find(r => r.path === path)
+      if (part) {
+        if (part.meta.title) {
+          parts.push({
+            label: part.meta.title,
+            to: part.path,
+          })
+        }
+      }
     }
   })
 
-  return breadcrumbs
+  return parts
 }) satisfies ComputedRef<BreadcrumbItem[]>
 </script>
 
@@ -40,6 +42,6 @@ const crumbs = computed(() => {
     v-if="route?.matched[0]?.name !== 'index'"
     class="pt-8 pb-4"
   >
-    <UBreadcrumb :items="crumbs" />
+    <UBreadcrumb :items="items" />
   </UContainer>
 </template>
