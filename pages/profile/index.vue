@@ -9,7 +9,7 @@ definePageMeta({
   title,
 })
 
-const { user } = useUserSession()
+const { user, clear } = useUserSession()
 const toast = useToast()
 const loading = ref(false)
 async function sendConfirmationEmail() {
@@ -46,13 +46,18 @@ async function sendConfirmationEmail() {
     loading.value = false
   }
 }
+
+async function logout() {
+  await clear()
+  window.location.reload()
+}
 </script>
 
 <template>
   <main>
-    <UCard>
+    <UCard class="mb-8">
       <template #header>
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-0">
           <h3 class="text-lg font-medium">
             Информация о пользователе
           </h3>
@@ -68,7 +73,7 @@ async function sendConfirmationEmail() {
       </template>
 
       <div class="space-y-4">
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <div class="text-sm text-gray-500">
               Имя
@@ -87,11 +92,11 @@ async function sendConfirmationEmail() {
           </div>
         </div>
 
-        <div>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div class="text-sm text-gray-500">
             Email
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex flex-wrap items-center gap-4">
             {{ user?.email }}
             <UBadge
               v-if="user?.confirmed"
@@ -140,6 +145,13 @@ async function sendConfirmationEmail() {
         </client-only>
       </template>
     </UCard>
-    <NuxtPage />
+    <div class="flex flex-row justify-end">
+      <UButton
+        variant="outline"
+        @click="logout"
+      >
+        Выйти
+      </UButton>
+    </div>
   </main>
 </template>

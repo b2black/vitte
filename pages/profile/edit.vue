@@ -10,12 +10,10 @@ definePageMeta({
   middleware: 'authenticated',
   title,
 })
-
-function handleUpdate() {}
 </script>
 
 <template>
   <main>
-    <ProfileEditForm @update="handleUpdate" />
+    <ProfileEditForm />
   </main>
 </template>

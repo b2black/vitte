@@ -4,6 +4,7 @@ import LoginForm from '~/components/Forms/LoginForm.vue'
 
 const { loggedIn, clear, user } = useUserSession()
 const isLoginFormOpen = ref(false)
+const isSlideOverOpen = ref(false)
 
 const profileItems: DropdownMenuItem[] = [
   [
@@ -88,6 +89,7 @@ watch(loggedIn, (value) => {
           </div>
         </div>
         <USlideover
+          v-model:open="isSlideOverOpen"
           side="right"
           :width="300"
           title="Меню"
@@ -100,11 +102,29 @@ watch(loggedIn, (value) => {
           />
 
           <template #body>
-            <UNavigationMenu
-              orientation="vertical"
-              :items="menuItems"
-              class="w-full"
-            />
+            <div class="flex flex-col gap-8 justify-between h-full">
+              <UNavigationMenu
+                orientation="vertical"
+                :items="menuItems"
+                class="w-full"
+              />
+              <div class="flex flex-row justify-end">
+                <UButton
+                  v-if="!loggedIn"
+                  icon="i-lucide-user"
+                  label="Войти"
+                  color="primary"
+                  @click="navigateTo('/auth/login'); isSlideOverOpen = false"
+                />
+                <UButton
+                  v-else
+                  icon="i-lucide-user"
+                  label="Личный кабинет"
+                  color="primary"
+                  @click="navigateTo('/profile'); isSlideOverOpen = false"
+                />
+              </div>
+            </div>
           </template>
         </USlideover>
       </div>
