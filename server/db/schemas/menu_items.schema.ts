@@ -7,11 +7,11 @@ export const menuItems = pgTable('menu_items', {
   label: text('label').notNull(),
   icon: text('icon'),
   to: text('to').notNull(),
-  parentId: integer('parent_id').references((): AnyPgColumn => menuItems.id),
+  parent_id: integer('parent_id').references((): AnyPgColumn => menuItems.id),
   order: integer('order').notNull().default(0),
-  isActive: boolean('is_active').notNull().default(true),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  active: boolean('active').notNull().default(true),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+  updated_at: timestamp('updated_at').defaultNow().notNull(),
 })
 
 export const menuItemsRelations = relations(menuItems, ({ one, many }) => ({
@@ -19,7 +19,7 @@ export const menuItemsRelations = relations(menuItems, ({ one, many }) => ({
     relationName: 'parent_child',
   }),
   parent: one(menuItems, {
-    fields: [menuItems.parentId],
+    fields: [menuItems.parent_id],
     references: [menuItems.id],
     relationName: 'parent_child',
   }),

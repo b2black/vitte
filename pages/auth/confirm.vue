@@ -4,10 +4,6 @@ const title = 'Подтверждение email'
 useHead({
   title,
 })
-
-definePageMeta({
-  title,
-})
 const { confirmEmail, status, message } = useConfirmEmail()
 const { clear } = useUserSession()
 

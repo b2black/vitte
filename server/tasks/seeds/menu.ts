@@ -40,36 +40,14 @@ export default defineTask({
       .values(mainMenuItems)
       .returning({ id: tables.menuItems.id, label: tables.menuItems.label })
 
-    const servicesParent = mainItems.find(item => item.label === 'Сервисы')
     const contactsParent = mainItems.find(item => item.label === 'Контакты')
 
     const subMenuItems: (typeof tables.menuItems.$inferInsert)[] = [
       {
-        label: 'Веб-разработка',
-        icon: 'i-lucide-code',
-        to: '/services/web-dev',
-        parentId: servicesParent?.id,
-        order: 1,
-      },
-      {
-        label: 'Графический дизайн',
-        icon: 'i-lucide-paintbrush',
-        to: '/services/design',
-        parentId: servicesParent?.id,
-        order: 2,
-      },
-      {
-        label: 'Аналитика',
-        icon: 'i-lucide-chart-bar',
-        to: '/services/analytics',
-        parentId: servicesParent?.id,
-        order: 3,
-      },
-      {
         label: 'Обратная связь',
         icon: 'i-lucide-send',
         to: '/contacts/form',
-        parentId: contactsParent?.id,
+        parent_id: contactsParent?.id,
         order: 1,
       },
     ]

@@ -6,7 +6,6 @@ useHead({
 })
 definePageMeta({
   middleware: 'authenticated',
-  title,
 })
 
 const { user, clear } = useUserSession()

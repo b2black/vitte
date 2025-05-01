@@ -6,10 +6,6 @@ useHead({
   title,
 })
 
-definePageMeta({
-  title,
-})
-
 const registerFormRef = ref<typeof RegisterForm>()
 </script>
 

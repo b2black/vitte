@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import AppHeader from '~/components/AppHeader.vue'
 import AppFooter from '~/components/AppFooter.vue'
-import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import BreadCrumbs from '~/components/BreadCrumbs.vue'
 
 const route = useRoute()
-const title = computed(() => route.meta.title as string)
+
+const title = null
 const isIndex = computed(() => route.name === 'index')
 </script>
 
 <template>
   <div class="main-layout">
     <AppHeader />
-    <Breadcrumbs />
+    <bread-crumbs />
     <UContainer class="min-h-screen py-8">
       <h1
         v-if="title && !isIndex"

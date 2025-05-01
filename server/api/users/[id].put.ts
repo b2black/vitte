@@ -8,9 +8,9 @@ export default defineEventHandler(async (event) => {
 
   const { user } = await requireUserSession(event)
 
-  const validUser = userId === user.id
+  const hasEditRights = userId === user.id
 
-  if (!validUser) {
+  if (!hasEditRights) {
     throw createError({ statusCode: 400, message: 'Отсутствуют права на редактирование' })
   }
 

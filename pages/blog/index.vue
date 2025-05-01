@@ -4,9 +4,6 @@ const title = 'Блог'
 useHead({
   title,
 })
-definePageMeta({
-  title,
-})
 </script>
 
 <template>

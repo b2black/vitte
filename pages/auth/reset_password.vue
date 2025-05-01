@@ -12,10 +12,6 @@ const title = 'Сброс пароля'
 useHead({
   title,
 })
-
-definePageMeta({
-  title,
-})
 </script>
 
 <template>

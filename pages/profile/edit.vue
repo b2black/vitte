@@ -8,7 +8,6 @@ useHead({
 })
 definePageMeta({
   middleware: 'authenticated',
-  title,
 })
 </script>
 

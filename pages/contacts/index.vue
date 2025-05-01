@@ -4,9 +4,6 @@ const title = 'Контакты'
 useHead({
   title,
 })
-definePageMeta({
-  title,
-})
 </script>
 
 <template>

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 const title = 'МУИВ | Главная'
-definePageMeta({
-  title,
-})
 
 useHead({
   title,
