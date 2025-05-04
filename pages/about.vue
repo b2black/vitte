@@ -7,5 +7,6 @@ useHead({
 </script>
 
 <template>
-  <main />
+  <main>
+  </main>
 </template>

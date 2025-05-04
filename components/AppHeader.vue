@@ -67,7 +67,7 @@ watch(loggedIn, (value) => {
               />
               <template #body>
                 <LoginForm
-                  @forgot-password="navigateTo('/auth/forgot_password'); isLoginFormOpen = false"
+                  @forgot-password="navigateTo('/auth/forgot-password'); isLoginFormOpen = false"
                   @register="navigateTo('/auth/register'); isLoginFormOpen = false"
                 />
               </template>

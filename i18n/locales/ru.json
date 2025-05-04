@@ -1,0 +1,48 @@
+{
+  "breadcrumb": {
+    "items": {
+      "index": {
+        "label": "Главная"
+      },
+      "blog": {
+        "label": "Блог"
+      },
+      "about": {
+        "label": "Об Университете"
+      },
+      "services": {
+        "label": "Сервисы"
+      },
+      "contacts": {
+        "label": "Контакты"
+      },
+      "contacts-form": {
+        "label": "Обратная связь"
+      },
+      "auth": {
+        "label": "Авторизация"
+      },
+      "auth-register": {
+        "label": "Регистрация"
+      },
+      "auth-login": {
+        "label": "Войти"
+      },
+      "auth-forgot-password": {
+        "label": "Забыли пароль"
+      },
+      "auth-confirm": {
+        "label": "Подтверждение email"
+      },
+      "auth-reset-password": {
+        "label": "Восстановить пароль"
+      },
+      "profile": {
+        "label": "Личный кабинет"
+      },
+      "profile-edit": {
+        "label": "Редактировать"
+      }
+    }
+  }
+}

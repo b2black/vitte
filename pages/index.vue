@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const title = 'МУИВ | Главная'
-
-useHead({
-  title,
+definePageMeta({
+  layout: 'clear',
 })
 </script>
 

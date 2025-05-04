@@ -7,6 +7,10 @@ if (!route.query.token) {
   navigateTo('/auth/login')
 }
 
+definePageMeta({
+  middleware: 'auth',
+})
+
 const title = 'Сброс пароля'
 
 useHead({

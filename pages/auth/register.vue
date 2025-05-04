@@ -6,6 +6,10 @@ useHead({
   title,
 })
 
+definePageMeta({
+  middleware: 'auth',
+})
+
 const registerFormRef = ref<typeof RegisterForm>()
 </script>
 

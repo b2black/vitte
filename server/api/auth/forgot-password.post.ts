@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
     { expiresIn: '1h' },
   )
 
-  const resetLink = `${protocol}://${host}/auth/reset_password?token=${token}`
+  const resetLink = `${protocol}://${host}/auth/reset-password?token=${token}`
 
   const mail = useMail()
 

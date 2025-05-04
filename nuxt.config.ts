@@ -10,9 +10,13 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     'nuxt-auth-utils',
     '@nuxtjs/i18n',
+    '@nuxtjs/seo',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
+  site: {
+    name: 'МУИВ',
+  },
   ui: {
     colorMode: false,
   },
@@ -29,5 +33,8 @@ export default defineNuxtConfig({
   },
   i18n: {
     defaultLocale: 'ru',
+    locales: [
+      { code: 'ru', name: 'Русский', file: 'ru.json', lazy: true },
+    ],
   },
 })
