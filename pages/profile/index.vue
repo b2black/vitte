@@ -6,6 +6,7 @@ useHead({
 })
 definePageMeta({
   middleware: 'non-authenticated',
+  layout: 'profile',
 })
 
 const { user, clear } = useUserSession()
@@ -137,20 +138,20 @@ async function logout() {
       </div>
 
       <template #footer>
-        <client-only>
-          <div class="text-sm text-gray-500">
-            Дата регистрации: {{ new Date(user?.created_at).toLocaleDateString() }}
-          </div>
-        </client-only>
+        <div class="flex flex-wrap justify-between gap-8">
+          <client-only>
+            <div class="text-sm text-gray-500">
+              Дата регистрации: {{ new Date(user?.created_at).toLocaleDateString() }}
+            </div>
+          </client-only>
+          <UButton
+            variant="outline"
+            @click="logout"
+          >
+            Выйти
+          </UButton>
+        </div>
       </template>
     </UCard>
-    <div class="flex flex-row justify-end">
-      <UButton
-        variant="outline"
-        @click="logout"
-      >
-        Выйти
-      </UButton>
-    </div>
   </main>
 </template>

@@ -10,4 +10,5 @@ export const services = pgTable('services', {
   updated_at: timestamp('updated_at').defaultNow().$onUpdateFn(() => new Date()).notNull(),
   icon: text('icon'),
   order: integer('order').notNull().default(0),
+  image: text('image'),
 })

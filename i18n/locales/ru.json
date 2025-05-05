@@ -41,7 +41,13 @@
         "label": "Личный кабинет"
       },
       "profile-edit": {
-        "label": "Редактировать"
+        "label": "Редактировать профиль"
+      },
+      "profile-services": {
+        "label": "Сервисы"
+      },
+      "profile-users": {
+        "label": "Пользователи"
       }
     }
   }

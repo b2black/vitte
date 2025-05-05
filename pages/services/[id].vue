@@ -40,7 +40,30 @@ useBreadcrumbItems({
       >
         {{ title }}
       </h1>
-      {{ service }}
+
+      <div
+        v-if="service?.image"
+        class="image-container flex h-96 mb-8"
+      >
+        <NuxtImg
+          :src="service?.image"
+          class="w-full object-cover"
+        />
+      </div>
+
+      <div
+        v-if="service?.description"
+        class="mb-8"
+      >
+        {{ service?.description }}
+      </div>
+
+      <UButton
+        variant="soft"
+        @click="$router.back()"
+      >
+        Назад
+      </UButton>
     </div>
   </main>
 </template>

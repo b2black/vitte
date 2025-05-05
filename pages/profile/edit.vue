@@ -8,6 +8,7 @@ useHead({
 })
 definePageMeta({
   middleware: 'non-authenticated',
+  layout: 'profile',
 })
 </script>
 
