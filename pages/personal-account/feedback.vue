@@ -14,16 +14,16 @@ const route = useRoute()
 
 const page = ref(route.query?.page ? parseInt(route.query?.page as string) : 1)
 
-const { data: feedbacks } = await useFetch('/api/feedback/', {
+const { data: feedback } = await useFetch('/api/feedback/', {
   params: {
     page: page,
   },
 })
 
-const meta = feedbacks.value?.meta
+const meta = feedback.value?.meta
 
 const items = computed(() => {
-  return feedbacks.value?.data?.map(item => ({
+  return feedback.value?.data?.map(item => ({
     id: item.id,
     Email: item.email,
     Name: item.name,

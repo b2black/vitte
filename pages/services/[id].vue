@@ -47,7 +47,8 @@ useBreadcrumbItems({
       >
         <NuxtImg
           :src="service?.image"
-          class="w-full object-cover"
+          class="w-full object-cover rounded-2xl"
+          format="webp"
         />
       </div>
 
@@ -58,12 +59,14 @@ useBreadcrumbItems({
         {{ service?.description }}
       </div>
 
-      <UButton
-        variant="soft"
-        @click="$router.back()"
-      >
-        Назад
-      </UButton>
+      <div class="flex justify-end">
+        <UButton
+          variant="soft"
+          @click="$router.back()"
+        >
+          Назад
+        </UButton>
+      </div>
     </div>
   </main>
 </template>

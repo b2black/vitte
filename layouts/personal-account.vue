@@ -18,7 +18,7 @@ const items = ref<NavigationMenuItem[][]>([
           to: '/personal-account/users',
         }, {
           label: 'Обратная связь',
-          to: '/personal-account/feedbacks',
+          to: '/personal-account/feedback',
         }]
       : []),
   ],

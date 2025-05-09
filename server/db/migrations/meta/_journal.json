@@ -127,6 +127,34 @@
       "when": 1746800762374,
       "tag": "0017_absurd_hellfire_club",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1746804232454,
+      "tag": "0018_boring_firebird",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1746806448532,
+      "tag": "0019_moaning_the_anarchist",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1746806864389,
+      "tag": "0020_unique_captain_flint",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1746808571211,
+      "tag": "0021_nasty_wild_pack",
+      "breakpoints": true
     }
   ]
 }
