@@ -22,7 +22,7 @@ export default defineTask({
         order: 2,
       },
       {
-        label: 'Сервисы',
+        label: 'Программы обучения',
         icon: 'i-lucide-school',
         to: '/services',
         order: 3,

@@ -120,6 +120,13 @@
       "when": 1746481472432,
       "tag": "0016_cooing_prism",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1746800762374,
+      "tag": "0017_absurd_hellfire_club",
+      "breakpoints": true
     }
   ]
 }

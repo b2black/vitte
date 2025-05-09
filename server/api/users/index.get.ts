@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { eq, count } from 'drizzle-orm'
 
 export default eventHandler(async (event) => {
   const query = getQuery(event)
@@ -6,6 +6,15 @@ export default eventHandler(async (event) => {
   const page = Number(query.page) || 1
 
   const offset = (page - 1) * limit
+
+  const { user } = await requireUserSession(event)
+  const hasRights = user.role.alias === 'admin' || user.role.alias === 'teacher'
+
+  if (!hasRights) {
+    throw createError({ statusCode: 400, message: 'Отсутствуют права на просмотр' })
+  }
+
+  const total = await useDrizzle().select({ count: count() }).from(tables.users)
 
   const data = await useDrizzle()
     .select({
@@ -27,6 +36,7 @@ export default eventHandler(async (event) => {
     meta: {
       page,
       limit,
+      total: total[0].count,
     },
   }
 })

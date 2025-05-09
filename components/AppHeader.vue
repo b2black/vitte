@@ -11,7 +11,7 @@ const profileItems: DropdownMenuItem[] = [
     {
       label: 'Профиль',
       icon: 'i-lucide-user',
-      onSelect: () => navigateTo('/profile'),
+      onSelect: () => navigateTo('/personal-account'),
       type: 'link',
     },
   ],
@@ -121,7 +121,7 @@ watch(loggedIn, (value) => {
                   icon="i-lucide-user"
                   label="Личный кабинет"
                   color="primary"
-                  @click="navigateTo('/profile'); isSlideOverOpen = false"
+                  @click="navigateTo('/personal-account'); isSlideOverOpen = false"
                 />
               </div>
             </div>

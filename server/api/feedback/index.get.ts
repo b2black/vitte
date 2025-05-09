@@ -7,11 +7,18 @@ export default eventHandler(async (event) => {
 
   const offset = (page - 1) * limit
 
-  const total = await useDrizzle().select({ count: count() }).from(tables.services)
+  const { user } = await requireUserSession(event)
+  const hasRights = user.role.alias === 'admin' || user.role.alias === 'teacher'
+
+  if (!hasRights) {
+    throw createError({ statusCode: 400, message: 'Отсутствуют права на просмотр' })
+  }
+
+  const total = await useDrizzle().select({ count: count() }).from(tables.feedback)
 
   const data = await useDrizzle()
     .select()
-    .from(tables.services)
+    .from(tables.feedback)
     .limit(limit)
     .offset(offset)
 

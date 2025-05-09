@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import FeedbackForm from '~/components/Forms/FeedbackForm.vue'
+
 const title = 'Обратная связь'
 
 useHead({
@@ -7,5 +9,7 @@ useHead({
 </script>
 
 <template>
-  <main />
+  <main>
+    <FeedbackForm />
+  </main>
 </template>

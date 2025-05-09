@@ -24,11 +24,8 @@ const props = defineProps({
       <p v-if="props.error?.statusCode === 404">
         Страница не найдена
       </p>
-      <p
-        v-else-if="props.error?.statusMessage"
-        class="text"
-      >
-        {{ props.error?.statusMessage }}
+      <p class="text">
+        {{ props.error?.statusMessage }} - {{ props.error?.message }}
       </p>
       <div class="mt-8 flex gap-4">
         <UButton @click="$router.push('/')">

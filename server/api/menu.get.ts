@@ -11,7 +11,7 @@ export default defineEventHandler(async (): Promise<NavigationMenuItem[]> => {
   })
 
   const services = await useDrizzle().query.services.findMany()
-  const servicesMainItemIndex = allMenuItems.findIndex(item => item.label === 'Сервисы')
+  const servicesMainItemIndex = allMenuItems.findIndex(item => item.label === 'Программы обучения')
 
   const servicesMenuItems = services.map(service => ({
     id: 9000 + service.id,

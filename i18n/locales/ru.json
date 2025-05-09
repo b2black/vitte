@@ -11,7 +11,7 @@
         "label": "Об Университете"
       },
       "services": {
-        "label": "Сервисы"
+        "label": "Программы обучения"
       },
       "contacts": {
         "label": "Контакты"
@@ -37,17 +37,17 @@
       "auth-reset-password": {
         "label": "Восстановить пароль"
       },
-      "profile": {
+      "personal-account": {
         "label": "Личный кабинет"
       },
-      "profile-edit": {
-        "label": "Редактировать профиль"
+      "personal-account-services": {
+        "label": "Программы обучения"
       },
-      "profile-services": {
-        "label": "Сервисы"
-      },
-      "profile-users": {
+      "personal-account-users": {
         "label": "Пользователи"
+      },
+      "personal-account-feedbacks": {
+        "label": "Обратная связь"
       }
     }
   }

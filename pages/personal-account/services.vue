@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'admin',
+  layout: 'personal-account',
+})
+
 const title = 'Программы обучения'
 
 useHead({
@@ -20,10 +25,10 @@ const meta = services.value?.meta
 const items = computed(() => {
   return services.value?.data?.map(item => ({
     id: item.id,
-    label: item?.label,
-    content: item?.description ? item?.description?.substring(0, 400) + '...' : '',
-    icon: item?.icon,
-    to: '/services/' + item.alias,
+    Label: item?.label,
+    Description: item?.description ? item?.description?.substring(0, 100) + '...' : '',
+    Icon: item?.icon,
+    To: '/services/' + item.alias,
   }))
 })
 
@@ -33,35 +38,12 @@ const total = ref(meta?.total ?? 0)
 
 <template>
   <main>
-    <div
-      v-if="items"
-      class="grid md:grid-cols-2 grid-cols-1 gap-4 mb-8"
-    >
-      <UCard
-        v-for="service in items"
-        :key="service.id"
-        variant="soft"
-      >
-        <template #header>
-          {{ service.label }}
-        </template>
-
-        <template
-          v-if="service.content"
-          #default
-        >
-          {{ service.content }}
-        </template>
-
-        <template #footer>
-          <ULink :to="service.to">Перейти</ULink>
-        </template>
-      </UCard>
+    <div class="mb-8">
+      <UTable
+        :data="items"
+        class="flex-1 w-full"
+      />
     </div>
-    <div v-else>
-      Ничего не найдено
-    </div>
-
     <div class="flex md:justify-end justify-center">
       <UPagination
         v-if="total > 0"
@@ -74,3 +56,7 @@ const total = ref(meta?.total ?? 0)
     </div>
   </main>
 </template>
+
+<style scoped>
+
+</style>

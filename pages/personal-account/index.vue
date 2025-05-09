@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ProfileEditForm from '~/components/Forms/ProfileEditForm.vue'
+
 const title = 'Личный кабинет'
 
 useHead({
@@ -6,12 +8,14 @@ useHead({
 })
 definePageMeta({
   middleware: 'non-authenticated',
-  layout: 'profile',
+  layout: 'personal-account',
 })
 
 const { user, clear } = useUserSession()
 const toast = useToast()
 const loading = ref(false)
+const view = ref('view')
+
 async function sendConfirmationEmail() {
   try {
     loading.value = true
@@ -49,23 +53,26 @@ async function sendConfirmationEmail() {
 
 async function logout() {
   await clear()
-  window.location.reload()
+  navigateTo('/')
 }
 </script>
 
 <template>
   <main>
-    <UCard class="mb-8">
+    <UCard
+      v-if="view === 'view'"
+      class="mb-8 w-full"
+    >
       <template #header>
         <div class="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-0">
           <h3 class="text-lg font-medium">
             Информация о пользователе
           </h3>
           <UButton
-            to="/profile/edit"
             variant="soft"
             color="primary"
             icon="i-heroicons-pencil-square"
+            @click="view = 'edit'"
           >
             Редактировать
           </UButton>
@@ -153,5 +160,16 @@ async function logout() {
         </div>
       </template>
     </UCard>
+    <div v-else-if="view === 'edit'">
+      <div class="flex justify-end mb-8">
+        <UButton
+          variant="soft"
+          @click="view = 'view'"
+        >
+          Назад
+        </UButton>
+      </div>
+      <ProfileEditForm />
+    </div>
   </main>
 </template>
