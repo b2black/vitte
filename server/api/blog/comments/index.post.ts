@@ -6,21 +6,21 @@ export default defineEventHandler(async (event) => {
 
   const db = useDrizzle()
 
-  const feedbackSchema = createInsertSchema(tables.feedback)
+  const commentsSchema = createInsertSchema(tables.comments)
   let validatedBody
   try {
-    validatedBody = parse(feedbackSchema, body)
+    validatedBody = parse(commentsSchema, body)
   }
   catch (error: unknown) {
     throw createError({ statusCode: 400, message: 'Ошибка валидации полей', data: error })
   }
 
   try {
-    await db.insert(tables.feedback).values(validatedBody).returning()
+    await db.insert(tables.comments).values(validatedBody).returning()
 
     return {
       success: true,
-      message: `Ваше обращение зарегистрировано`,
+      message: `Ваш комментарий отправлен`,
     }
   }
   catch (error: unknown) {

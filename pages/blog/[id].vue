@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import CommentsList from '~/components/Blog/CommentsList.vue'
+import AddComment from '~/components/Forms/AddComment.vue'
+
 const route = useRoute()
 
 const id = route.params.id as string
@@ -70,48 +73,14 @@ useBreadcrumbItems({
     </div>
     <USeparator class="mb-8" />
     <div>
-      <h3 class="text-sm font-semibold text-gray-700 mb-3">
-        Комментарии ({{ post?.comments_count }})
-      </h3>
-
-      <div
-        v-if="post?.comments?.length"
-        class="space-y-4"
-      >
-        <div
-          v-for="comment in post.comments"
-          :key="comment.id"
-          class="flex gap-3"
-        >
-          <div class="flex-shrink-0">
-            <div
-              class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center"
-            >
-              <UIcon
-                name="i-lucide-user"
-                class="text-gray-500 text-xs"
-              />
-            </div>
-          </div>
-          <div class="flex-1">
-            <div class="text-sm font-medium text-gray-800">
-              {{ comment.user.first_name }}
-            </div>
-            <div class="text-sm text-gray-600 mt-1">
-              {{ comment.content }}
-            </div>
-            <div class="text-xs text-gray-400 mt-1">
-              {{ new Date(comment.created_at).toLocaleDateString() }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        v-else
-        class="text-sm text-gray-500"
-      >
-        Пока нет комментариев
-      </div>
+      <CommentsList
+        :comments_count="post?.comments_count ? Number(post.comments_count) : undefined"
+        :comments="post?.comments"
+      />
+      <AddComment
+        v-if="post?.id"
+        :id="post?.id"
+      />
     </div>
   </main>
 </template>

@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
 
     const mail = useMail()
 
-    mail.sendMail(
+    await mail.sendMail(
       {
         to: body.email,
         subject: 'Подтверждение регистрации',
