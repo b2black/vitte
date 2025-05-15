@@ -20,15 +20,11 @@ export default defineNuxtConfig({
   ui: {
     colorMode: false,
   },
-  routeRules: {
-    '/api/**': { static: false, cache: false },
-  },
   compatibilityDate: '2024-11-01',
   nitro: {
     experimental: {
       tasks: true,
     },
-    noExternals: false,
     preset: 'vercel',
   },
   eslint: {
