@@ -1,72 +1,76 @@
 <script setup lang="ts">
-const route = useRoute()
-
-const alias = route.params.id as string
-const { data: service } = await useFetch(`/api/services/${alias}`)
-
-if (!service.value) {
-  throw createError({ statusCode: 404, message: 'Программа обучения не найдена' })
-}
-
-definePageMeta({
-  layout: 'clear',
-})
-
-const title = service.value?.label
+const title = 'Программы обучения'
 
 useHead({
   title,
 })
 
-useBreadcrumbItems({
-  overrides: [
-    undefined,
-    undefined,
-    {
-      label: title,
-    },
-  ],
+const route = useRoute()
+
+const page = ref(route.query?.page ? parseInt(route.query?.page as string) : 1)
+
+const { data: services } = await useFetch('/api/services/', {
+  params: {
+    page: page,
+  },
 })
+
+const meta = services.value?.meta
+
+const items = computed(() => {
+  return services.value?.data?.map(item => ({
+    id: item.id,
+    label: item?.label,
+    content: item?.description ? item?.description?.substring(0, 400) + '...' : '',
+    icon: item?.icon,
+    to: '/services/' + item.alias,
+  }))
+})
+
+const limit = ref(meta?.limit ?? 10)
+const total = ref(meta?.total ?? 0)
 </script>
 
 <template>
   <main>
-    <div class="pb-4">
-      <BreadCrumbs />
-    </div>
-    <div class="py-8">
-      <h1
-          class="text-2xl font-bold mb-8"
+    <div
+      v-if="items"
+      class="grid md:grid-cols-2 grid-cols-1 gap-4 mb-8"
+    >
+      <UCard
+        v-for="service in items"
+        :key="service.id"
+        variant="soft"
       >
-        {{ title }}
-      </h1>
+        <template #header>
+          {{ service.label }}
+        </template>
 
-      <div
-          v-if="service?.image"
-          class="image-container flex h-96 mb-8"
-      >
-        <NuxtImg
-            :src="service?.image"
-            class="w-full object-cover rounded-2xl"
-            format="webp"
-        />
-      </div>
-
-      <div
-          v-if="service?.description"
-          class="mb-8"
-      >
-        {{ service?.description }}
-      </div>
-
-      <div class="flex justify-end">
-        <UButton
-            variant="soft"
-            @click="$router.back()"
+        <template
+          v-if="service.content"
+          #default
         >
-          Назад
-        </UButton>
-      </div>
+          {{ service.content }}
+        </template>
+
+        <template #footer>
+          <ULink :to="service.to">Перейти</ULink>
+        </template>
+      </UCard>
+    </div>
+    <div v-else>
+      Ничего не найдено
+    </div>
+
+    <div class="flex md:justify-end justify-center">
+      <UPagination
+        v-if="total > 0"
+        v-model:page="page"
+        variant="soft"
+        :items-per-page="limit"
+        :total="total"
+        :to="toPage => ({ query: { page: toPage } })"
+      />
     </div>
   </main>
 </template>
