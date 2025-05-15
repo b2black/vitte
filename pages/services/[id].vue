@@ -2,7 +2,7 @@
 const route = useRoute()
 
 const alias = route.params.id as string
-const { data: service, status } = await useFetch(`/api/services/${alias}`)
+const { data: service } = await useFetch(`/api/services/${alias}`)
 
 if (!service.value) {
   throw createError({ statusCode: 404, message: 'Программа обучения не найдена' })
@@ -35,7 +35,6 @@ useBreadcrumbItems({
       <BreadCrumbs />
     </div>
     <div class="py-8">
-      {{ status }}
       <h1
         class="text-2xl font-bold mb-8"
       >
