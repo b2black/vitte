@@ -40,8 +40,6 @@ useBreadcrumbItems({
       >
         {{ title }}
       </h1>
-      {{ alias }}
-      {{ service }}
       <div
         v-if="service?.image"
         class="image-container flex h-96 mb-8"
