@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/seo',
   ],
-  ssr: false,
+  ssr: true,
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   site: {
