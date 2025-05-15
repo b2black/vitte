@@ -15,7 +15,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   routeRules: {
-    '/**': { static: true },
     '/api/**': { static: false, cache: false },
   },
   site: {
