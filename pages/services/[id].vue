@@ -8,8 +8,6 @@ if (!service.value) {
   throw createError({ statusCode: 404, message: 'Программа обучения не найдена' })
 }
 
-console.log(service.value)
-
 definePageMeta({
   layout: 'clear',
 })
@@ -42,35 +40,35 @@ useBreadcrumbItems({
       >
         {{ title }}
       </h1>
-      {{ alias }}
-      123213
-      {{ service }}
-      <div
-        v-if="service?.image"
-        class="image-container flex h-96 mb-8"
-      >
-        <NuxtImg
-          :src="service?.image"
-          class="w-full object-cover rounded-2xl"
-          format="webp"
-        />
-      </div>
-
-      <div
-        v-if="service?.description"
-        class="mb-8"
-      >
-        {{ service?.description }}
-      </div>
-
-      <div class="flex justify-end">
-        <UButton
-          variant="soft"
-          @click="$router.back()"
+      123123312
+      <ClientOnly>
+        <div
+          v-if="service?.image"
+          class="image-container flex h-96 mb-8"
         >
-          Назад
-        </UButton>
-      </div>
+          <NuxtImg
+            :src="service?.image"
+            class="w-full object-cover rounded-2xl"
+            format="webp"
+          />
+        </div>
+
+        <div
+          v-if="service?.description"
+          class="mb-8"
+        >
+          {{ service?.description }}
+        </div>
+
+        <div class="flex justify-end">
+          <UButton
+            variant="soft"
+            @click="$router.back()"
+          >
+            Назад
+          </UButton>
+        </div>
+      </ClientOnly>
     </div>
   </main>
 </template>
