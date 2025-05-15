@@ -1,4 +1,4 @@
-import { count } from 'drizzle-orm'
+import { count, eq } from 'drizzle-orm'
 
 export default eventHandler(async (event) => {
   const query = getQuery(event)
@@ -12,6 +12,7 @@ export default eventHandler(async (event) => {
   const data = await useDrizzle()
     .select()
     .from(tables.services)
+    .where(eq(tables.services.active, true))
     .limit(limit)
     .offset(offset)
 

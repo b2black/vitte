@@ -27,7 +27,6 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/**': { isr: 60 },
-    '/api/*': { isr: false },
     '/api/**': { isr: false },
   },
   compatibilityDate: '2024-11-01',
