@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/seo',
   ],
+  ssr: false,
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   site: {
@@ -36,5 +37,9 @@ export default defineNuxtConfig({
     locales: [
       { code: 'ru', name: 'Русский', file: 'ru.json', lazy: true },
     ],
+  },
+  ogImage: { enabled: false },
+  robots: {
+    robotsTxt: false,
   },
 })
