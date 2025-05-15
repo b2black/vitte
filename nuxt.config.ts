@@ -20,6 +20,9 @@ export default defineNuxtConfig({
   ui: {
     colorMode: false,
   },
+  routeRules: {
+    '/**': { isr: 60 },
+  },
   compatibilityDate: '2024-11-01',
   nitro: {
     experimental: {
