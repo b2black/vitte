@@ -14,14 +14,14 @@ export default defineNuxtConfig({
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-  routeRules: {
-    '/api/**': { static: false, cache: false },
-  },
   site: {
     name: 'МУИВ',
   },
   ui: {
     colorMode: false,
+  },
+  routeRules: {
+    '/api/**': { static: false, cache: false },
   },
   compatibilityDate: '2024-11-01',
   nitro: {
