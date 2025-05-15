@@ -42,7 +42,8 @@ useBreadcrumbItems({
       >
         {{ title }}
       </h1>
-
+      {{ alias }}
+      123213
       {{ service }}
       <div
         v-if="service?.image"
