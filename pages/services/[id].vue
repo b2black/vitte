@@ -8,6 +8,8 @@ if (!service.value) {
   throw createError({ statusCode: 404, message: 'Программа обучения не найдена' })
 }
 
+console.log(service.value)
+
 definePageMeta({
   layout: 'clear',
 })
@@ -41,6 +43,7 @@ useBreadcrumbItems({
         {{ title }}
       </h1>
 
+      {{ service }}
       <div
         v-if="service?.image"
         class="image-container flex h-96 mb-8"
