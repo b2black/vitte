@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   routeRules: {
-    '/**': { prerender: true },
+    '/**': { static: true },
     '/api/**': { static: false, cache: false },
   },
   site: {
@@ -29,6 +29,8 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
+    noExternals: false,
+    preset: 'vercel',
   },
   eslint: {
     config: {
