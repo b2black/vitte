@@ -15,7 +15,7 @@ const schema = v.object({
 type Schema = v.InferOutput<typeof schema>
 
 const state = reactive({
-  user_id: user.value.id,
+  user_id: user?.value?.id,
   post_id: props.id,
   content: '',
 })
