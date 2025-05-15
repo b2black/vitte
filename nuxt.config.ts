@@ -37,8 +37,4 @@ export default defineNuxtConfig({
       { code: 'ru', name: 'Русский', file: 'ru.json', lazy: true },
     ],
   },
-  ogImage: { enabled: false },
-  robots: {
-    robotsTxt: false,
-  },
 })
