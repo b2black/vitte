@@ -21,14 +21,6 @@ export default defineNuxtConfig({
   ui: {
     colorMode: false,
   },
-  runtimeConfig: {
-    nitro: { envPrefix: 'VERCEL_' },
-    region: process.env.VERCEL_REGION,
-  },
-  routeRules: {
-    '/**': { isr: 60 },
-    '/api/**': { isr: 60 },
-  },
   compatibilityDate: '2024-11-01',
   nitro: {
     experimental: {
