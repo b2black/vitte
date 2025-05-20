@@ -2,7 +2,7 @@ import { count, eq } from 'drizzle-orm'
 
 export default eventHandler(async (event) => {
   const query = getQuery(event)
-  const limit = Number(query.limit) || 10
+  const limit = Number(query.limit) || 50
   const page = Number(query.page) || 1
 
   const offset = (page - 1) * limit

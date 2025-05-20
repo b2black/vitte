@@ -2,6 +2,7 @@ import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/node-postgres'
 
 import { users, usersRelations } from '~/server/db/schemas/users.schema'
+import { applications, applicationsRelations } from '~/server/db/schemas/applications.schema'
 import { roles } from '~/server/db/schemas/roles.schema'
 import { menuItems, menuItemsRelations } from '~/server/db/schemas/menu_items.schema'
 import { services } from '~/server/db/schemas/services.schema'
@@ -16,6 +17,7 @@ export const tables = {
   feedback,
   posts,
   comments,
+  applications,
 }
 
 export const relations = {
@@ -23,6 +25,7 @@ export const relations = {
   menuItemsRelations,
   commentsRelations,
   postsRelations,
+  applicationsRelations,
 }
 
 export function useDrizzle() {

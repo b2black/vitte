@@ -27,7 +27,7 @@ const items = computed(() => {
   }))
 })
 
-const limit = ref(meta?.limit ?? 10)
+const limit = ref(meta?.limit ?? 50)
 const total = ref(meta?.total ?? 0)
 </script>
 

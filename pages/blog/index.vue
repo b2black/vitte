@@ -26,7 +26,7 @@ const total = ref(meta?.total ?? 0)
       <div
         v-for="post in posts?.data"
         :key="post.id"
-        class="rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full cursor-pointer"
+        class="rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full cursor-pointer mb-8"
         @click="navigateTo(`/blog/${post.slug}`)"
       >
         <div class="md:flex">

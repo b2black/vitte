@@ -58,7 +58,11 @@ useBreadcrumbItems({
         {{ service?.description }}
       </div>
 
-      <div class="flex justify-end">
+      <div class="flex justify-between">
+        <UButton @click="navigateTo(`/apply?service=${service?.id}`)">
+          Записаться
+        </UButton>
+
         <UButton
           variant="soft"
           @click="$router.back()"

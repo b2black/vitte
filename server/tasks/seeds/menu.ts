@@ -33,6 +33,12 @@ export default defineTask({
         to: '/contacts',
         order: 4,
       },
+      {
+        label: 'Записаться на обучение',
+        icon: 'i-lucide-handshake',
+        to: '/apply',
+        order: 5,
+      },
     ]
 
     const mainItems = await useDrizzle()

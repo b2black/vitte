@@ -1,0 +1,1 @@
+ALTER TABLE "applications" RENAME COLUMN "first_name" TO "name";

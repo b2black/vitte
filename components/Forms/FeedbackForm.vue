@@ -12,8 +12,8 @@ const schema = v.object({
 type Schema = v.InferOutput<typeof schema>
 
 const state = reactive({
-  email: user.value.email ?? '',
-  name: user.value.first_name ?? '',
+  email: user?.value?.email ?? '',
+  name: user?.value?.first_name ?? '',
   message: '',
 })
 
@@ -98,6 +98,3 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </UButton>
   </UForm>
 </template>
-
-<style scoped>
-</style>
