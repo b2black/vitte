@@ -19,6 +19,9 @@ const items = ref<NavigationMenuItem[][]>([
         }, {
           label: 'Обратная связь',
           to: '/personal-account/feedback',
+        }, {
+          label: 'Заявки на обучение',
+          to: '/personal-account/applications',
         }]
       : []),
   ],

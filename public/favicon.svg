@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="103.56" height="103.56"><svg id="SvgjsSvg1015" data-name=" Слой 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 103.56 103.56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #c21631;
+      }
+
+      .cls-3 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="SvgjsClipPath1014">
+      <rect class="cls-1" x="12.89" y="-.24" width="240" height="105"></rect>
+    </clipPath>
+  </defs>
+  <g class="cls-3">
+    <g id="SvgjsG1013" data-name=" Ð Ð Ð Ð Ð Ð Ð Ð 1">
+      <path id="SvgjsPath1012" data-name="Vector 34" class="cls-2" d="M77.7,98.22h-16.99c.35-.73.57-1.7.57-2.77s-.21-1.99-.54-2.71h16.96c2.21,0,3.31.9,3.31,2.7s-1.11,2.78-3.31,2.78ZM60.62,87.45c.4-.75.66-1.79.66-2.94,0-.78-.12-1.51-.32-2.14h15.58c2.16,0,3.24.88,3.24,2.63s-1.08,2.63-3.24,2.63h-15.92s0-.18,0-.18ZM87.47,92.05c-.84-1.07-2.05-1.86-3.65-2.36,1.19-.58,2.09-1.37,2.72-2.36.63-.99.94-2.13.94-3.43,0-2.21-.89-3.91-2.68-5.12s-4.3-1.81-7.54-1.81h-24.17v26.67h24.91c3.42,0,6.06-.68,7.93-2.04,1.86-1.36,2.8-3.22,2.8-5.58,0-1.57-.42-2.89-1.25-3.96h-.01Z"></path>
+      <path id="SvgjsPath1011" data-name="Vector 35" class="cls-2" d="M53.11,70.03v-26.39h-12.67l-7.13,18.25-7.19-18.25h-12.63v26.39h7.78v-19.21l7.95,19.21h8.16l7.92-19.25v19.25h7.81Z"></path>
+      <path id="SvgjsPath1010" data-name="Vector 36" class="cls-2" d="M72.63,56.48l-7.31-12.83h-9.01l11.83,20.57-3.31,5.82h8.83l15.06-26.39h-8.83l-7.25,12.83h0Z"></path>
+      <path id="SvgjsPath1009" data-name="Vector 37" class="cls-2" d="M21.36,95.29v-18.11h-7.87v26.39h10.27l12.56-18.64v18.64h7.87v-26.39h-10.6s-12.23,18.11-12.23,18.11Z"></path>
+      <path id="SvgjsPath1008" data-name="Vector 38" class="cls-2" d="M13.25,24.55v7.43c29.82,0,56.46-9.03,77.04-26.13L85.78.07C66.5,16.09,41.41,24.55,13.25,24.55Z"></path>
+    </g>
+  </g>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

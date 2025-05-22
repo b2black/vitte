@@ -54,7 +54,7 @@ const total = ref(meta?.total ?? 0)
         </template>
 
         <template #footer>
-          <ULink :to="service.to">Перейти</ULink>
+          <UButton @click="navigateTo(service.to)">Перейти</UButton>
         </template>
       </UCard>
     </div>
