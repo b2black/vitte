@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import {FetchError} from "ofetch";
 
 const { user, loggedIn } = useUserSession()
 
@@ -24,27 +25,28 @@ const toast = useToast()
 const loading = ref(false)
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  loading.value = true
+  try {
+    loading.value = true
+    const result = await $fetch('/api/blog/comments', {
+      method: 'POST',
+      body: event.data,
+    })
 
-  const result = await useFetch('/api/blog/comments', {
-    method: 'POST',
-    body: event.data,
-  })
+    toast.add({ title: 'Спасибо', description: result.message, color: 'success' })
 
-  loading.value = false
-
-  if (result.error.value?.data?.error) {
-    const errorMessage = result.error?.value?.data?.message || 'Произошла неизвестная ошибка'
-    toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
-    return
+    setTimeout(() => {
+      state.content = ''
+      window.location.reload()
+    }, 500)
+  } catch (e) {
+    if (e instanceof FetchError) {
+      const errorMessage = e?.data?.message || 'Произошла неизвестная ошибка'
+      toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
+      return
+    }
+  } finally {
+    loading.value = false
   }
-
-  toast.add({ title: 'Спасибо', description: result.data.value?.message, color: 'success' })
-
-  setTimeout(() => {
-    state.content = ''
-    window.location.reload()
-  }, 500)
 }
 </script>
 

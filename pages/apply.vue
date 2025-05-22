@@ -58,7 +58,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     const result = await $fetch('/api/services/applications', {
       method: 'POST',
       body: event.data,
-      lazy: true,
     })
 
     toast.add({ title: 'Спасибо', description: result.message, color: 'success' })

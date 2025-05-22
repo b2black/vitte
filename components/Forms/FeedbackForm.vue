@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { FetchError } from 'ofetch'
 
 const { user } = useUserSession()
 const schema = v.object({
@@ -20,21 +21,24 @@ const state = reactive({
 const toast = useToast()
 const loading = ref(false)
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  loading.value = true
-
-  const result = await useFetch('/api/feedback', {
-    method: 'POST',
-    body: event.data,
-  })
-
-  loading.value = false
-
-  if (result.error.value?.data?.error) {
-    const errorMessage = result.error?.value?.data?.message || 'Произошла неизвестная ошибка'
-    toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
-    return
+  try {
+    loading.value = true
+    const result = await $fetch('/api/feedback', {
+      method: 'POST',
+      body: event.data,
+    })
+    toast.add({ title: 'Спасибо', description: result.data.value?.message, color: 'success' })
   }
-  toast.add({ title: 'Спасибо', description: result.data.value?.message, color: 'success' })
+  catch (e) {
+    if (e instanceof FetchError) {
+      const errorMessage = e?.data?.message || 'Произошла неизвестная ошибка'
+      toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
+      return
+    }
+  }
+  finally {
+    loading.value = false
+  }
 }
 </script>
 

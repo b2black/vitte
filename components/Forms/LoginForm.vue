@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { FetchError } from 'ofetch'
 
 const { fetch: refreshSession } = useUserSession()
 const schema = v.object({
@@ -21,24 +22,28 @@ const loading = ref(false)
 const emit = defineEmits(['forgotPassword', 'register', 'success'])
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  loading.value = true
+  try {
+    loading.value = true
 
-  const result = await useFetch('/api/auth/login', {
-    method: 'POST',
-    body: event.data,
-  })
+    await $fetch('/api/auth/login', {
+      method: 'POST',
+      body: event.data,
+    })
 
-  loading.value = false
-
-  if (result.error.value?.data?.error) {
-    const errorMessage = result.error?.value?.data?.message || 'Произошла неизвестная ошибка'
-    toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
-    return
+    toast.add({ title: 'Успешно', description: 'Добро пожаловать!', color: 'success' })
+    emit('success')
+    await refreshSession()
   }
-
-  toast.add({ title: 'Успешно', description: 'Добро пожаловать!', color: 'success' })
-  emit('success')
-  await refreshSession()
+  catch (e) {
+    if (e instanceof FetchError) {
+      const errorMessage = e?.data?.message || 'Произошла неизвестная ошибка'
+      toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
+      return
+    }
+  }
+  finally {
+    loading.value = false
+  }
 }
 </script>
 

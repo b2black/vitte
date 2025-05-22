@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { FetchError } from 'ofetch'
 
 const { user, fetch: refreshSession } = useUserSession()
 
@@ -24,19 +25,26 @@ const state = reactive({
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  loading.value = true
-  const result = await useFetch(`/api/users/${user.value.id}`, {
-    method: 'PUT',
-    body: event.data,
-  })
-  loading.value = false
-  if (result.error.value?.data?.error) {
-    const errorMessage = result.error?.value?.data?.message || 'Произошла неизвестная ошибка'
-    toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
-    return
+  try {
+    loading.value = true
+    await $fetch(`/api/users/${user.value.id}`, {
+      method: 'PUT',
+      body: event.data,
+    })
+
+    toast.add({ title: 'Успешно', description: 'Профиль обновлен', color: 'success' })
+    await refreshSession()
   }
-  toast.add({ title: 'Успешно', description: 'Профиль обновлен', color: 'success' })
-  await refreshSession()
+  catch (e) {
+    if (e instanceof FetchError) {
+      const errorMessage = e?.data?.message || 'Произошла неизвестная ошибка'
+      toast.add({ title: 'Ошибка', description: errorMessage, color: 'error' })
+      return
+    }
+  }
+  finally {
+    loading.value = false
+  }
 }
 </script>
 

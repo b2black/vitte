@@ -23,6 +23,7 @@ export default defineEventHandler(async (event) => {
       message: `Ваша заявка принята`,
     }
   }
+  // eslint-disable-next-line
   catch (error: any) {
     if (typeof error?.code === 'string' && error?.code === '23505') {
       throw createError({ statusCode: 400, message: 'Вы уже отправляли заявку по данному направлению', data: error })

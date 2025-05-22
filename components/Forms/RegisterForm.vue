@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { FetchError } from 'ofetch'
 
 const schema = v.object({
   first_name: v.pipe(v.string(), v.nonEmpty()),
@@ -25,29 +26,31 @@ const message = ref('')
 
 const emit = defineEmits(['login', 'success'])
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  loading.value = true
-  status.value = 'loading'
-  message.value = 'Загрузка'
+  try {
+    loading.value = true
+    status.value = 'loading'
+    message.value = 'Загрузка'
 
-  const result = await useFetch('/api/auth/register', {
-    method: 'POST',
-    body: event.data,
-  })
+    const result = await $fetch('/api/auth/register', {
+      method: 'POST',
+      body: event.data,
+    })
 
-  loading.value = false
-
-  if (result.error.value?.data?.error) {
-    const errorMessage = result.error?.value?.data?.message || 'Произошла неизвестная ошибка'
-    toast.add({ title: 'Произошла ошибка', description: errorMessage, color: 'error' })
-    status.value = 'error'
-    message.value = errorMessage
-    return
-  }
-  else {
     status.value = 'success'
     message.value = result.data?.value?.message ?? 'Пользователь успешно зарегистрирован'
     toast.add({ title: 'Успешно', description: result.data?.value?.message || 'Пользователь успешно зарегистрирован', color: 'success' })
     emit('success')
+  }
+  catch (e) {
+    if (e instanceof FetchError) {
+      const errorMessage = e?.data?.message || 'Произошла неизвестная ошибка'
+      toast.add({ title: 'Произошла ошибка', description: errorMessage, color: 'error' })
+      status.value = 'error'
+      message.value = errorMessage
+    }
+  }
+  finally {
+    loading.value = false
   }
 }
 
