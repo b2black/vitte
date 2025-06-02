@@ -49,6 +49,9 @@
       "personal-account-feedback": {
         "label": "Обратная связь"
       },
+      "personal-account-applications": {
+        "label": "Заявки на обучение"
+      },
       "apply": {
         "label": "Записаться на обучение"
       }
