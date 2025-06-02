@@ -16,10 +16,9 @@ const currentYear = new Date().getFullYear()
           Московский университет имени Витте - один из ведущих негосударственных вузов России
         </p>
       </div>
-
       <div class="mt-8 border-t border-gray-900/10 pt-8">
         <p class="text-xs leading-5 text-gray-500">
-          {{ currentYear }} МУИВ. Все права защищены.
+          Разработал Мелков Богдан Алексеевич <br /> {{ currentYear }}
         </p>
       </div>
     </UContainer>
