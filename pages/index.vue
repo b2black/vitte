@@ -15,18 +15,6 @@ const items = [
 
 <template>
   <main>
-    <UCarousel
-      v-slot="{ item }"
-      :items="items"
-      class="w-full mb-8"
-    >
-      <NuxtImg
-        :src="item"
-        format="webp"
-        class="w-full object-cover rounded-2xl"
-      />
-    </UCarousel>
-
     <div>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, blanditiis iste iusto officiis
       perspiciatis quas unde voluptates. Accusamus adipisci aspernatur, assumenda commodi consequatur eius id illo,
